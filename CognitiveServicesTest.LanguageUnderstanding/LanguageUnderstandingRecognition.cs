@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CognitiveServicesTest.LanguageUnderstanding
+{
+    /// <summary>
+    ///
+    /// </summary>
+    public class LanguageUnderstandingRecognition
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LanguageUnderstandingRecognition" /> class.
+        /// </summary>
+        /// <param name="entityName">Name of the entity.</param>
+        /// <param name="parameters">The parameters.</param>
+        public LanguageUnderstandingRecognition(string entityName, Dictionary<string, string> parameters)
+        {
+            this.EntityName = entityName;
+            this.Parameters = parameters;
+        }
+
+        /// <summary>
+        /// Gets the name of the entity.
+        /// </summary>
+        /// <value>
+        /// The name of the entity.
+        /// </value>
+        public string EntityName { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the parameters.
+        /// </summary>
+        /// <value>
+        /// The parameters.
+        /// </value>
+        public Dictionary<string, string> Parameters { get; set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in this.Parameters)
+            {
+                sb.Append(item.Key + "=" + item.Value + ";");
+            }
+
+            sb.Remove(sb.Length - 1, 1);
+
+            return this.EntityName + "(" + sb.ToString() + ")";
+        }
+    }
+}
