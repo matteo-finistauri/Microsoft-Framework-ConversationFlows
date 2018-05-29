@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <typeparam name="T">The state type.</typeparam>
     /// <typeparam name="U">The action type.</typeparam>
     /// <typeparam name="Y">The condition parameter type.</typeparam>
     public class StateMachine<T, U, Y>
     {
+        #region Constructor
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Process" /> class.
         /// </summary>
@@ -23,13 +25,17 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             this.CurrentState = initialStatus;
         }
 
+        #endregion Constructor
+
+        #region Properties
+
         /// <summary>
         /// Gets or sets the transitions.
         /// </summary>
         /// <value>
         /// The transitions.
         /// </value>
-        public List<StateTransition<T, U, Y>> Transitions { get; private set; } = new List<StateTransition<T, U, Y>>();
+        public List<StateTransition<T, U, Y>> Transitions { get; } = new List<StateTransition<T, U, Y>>();
 
         /// <summary>
         /// Gets the state of the current.
@@ -39,30 +45,9 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </value>
         public T CurrentState { get; private set; }
 
-        /// <summary>
-        /// Gets the next.
-        /// </summary>
-        /// <param name="action">The action.</param>
-        /// <param name="conditionObject">The condition object.</param>
-        /// <returns></returns>
-        private T GetNext(U action, Y conditionObject)
-        {
-            var validTransitions = this.Transitions.Where(
-                x => x.CurrentState.Equals(this.CurrentState) &&
-                x.Action.Equals(action) &&
-                x.Condition(this.CurrentState, action, conditionObject
-                )).Select(x => x.NextState);
-            if (validTransitions.Count() == 0)
-            {
-                throw new Exception("No transitions found for " + this.CurrentState + " --> " + action);
-            }
-            else if (validTransitions.Count() > 1)
-            {
-                throw new Exception("The transition for " + this.CurrentState + " --> " + action + " is not unique");
-            }
+        #endregion Properties
 
-            return validTransitions.First();
-        }
+        #region Methods
 
         /// <summary>
         /// Moves the state of to next.
@@ -75,5 +60,32 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             this.CurrentState = GetNext(action, conditionObject);
             return this.CurrentState;
         }
+
+        /// <summary>
+        /// Gets the next.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        /// <param name="conditionObject">The condition object.</param>
+        /// <returns></returns>
+        private T GetNext(U action, Y conditionObject)
+        {
+            var validTransitions = this.Transitions.Where(
+                x => x.CurrentState.Equals(this.CurrentState) &&
+                x.Action.Equals(action) &&
+                (x.Condition == null || x.Condition(this.CurrentState, action, conditionObject))
+                ).Select(x => x.NextState);
+            if (validTransitions.Count() == 0)
+            {
+                throw new Exception("No transitions found for " + this.CurrentState + " --> " + action);
+            }
+            else if (validTransitions.Count() > 1)
+            {
+                throw new Exception("The transition for " + this.CurrentState + " --> " + action + " is not unique");
+            }
+
+            return validTransitions.First();
+        }
+
+        #endregion Methods
     }
 }

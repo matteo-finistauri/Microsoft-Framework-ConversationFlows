@@ -14,6 +14,8 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// <typeparam name="Y">The condition parameter type.</typeparam>
     public class StateTransition<T, U, Y>
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StateTransition" /> class.
         /// </summary>
@@ -28,8 +30,10 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             this.NextState = nextState;
             this.Action = action;
             this.IsFinalState = isFinalState;
-            this.Condition = condition ?? ((x, y, z) => true);
+            this.Condition = condition;
         }
+
+        #endregion Constructors
 
         #region Properties
 

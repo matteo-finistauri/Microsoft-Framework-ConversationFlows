@@ -41,6 +41,9 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             new StateTransition<State, string, LanguageUnderstandingRecognition>(State.InitialState, State.BuildingArmchair, "Build.Furniture", false, (x, y, z) => IsEntityEquals(z, "FurnitureType", "armchair"))
         };
 
+        /// <summary>
+        /// The luis engine
+        /// </summary>
         private readonly LuisStateFlowEngine<State> luisEngine;
 
         #endregion Fields
@@ -50,8 +53,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </summary>
         public MyLuisClient(string appId, string appKey)
         {
-            this.luisEngine = new LuisStateFlowEngine<State>(appId, appKey, State.InitialState, transitions, outputStrings);
-            this.luisEngine.SendToUser += this.LuisEngine_SendToUser;
+            this.luisEngine = new LuisStateFlowEngine<State>(appId, appKey, State.InitialState, transitions, x => this.SendToUser(this.outputStrings[x]));
         }
 
         /// <summary>
@@ -69,11 +71,10 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <summary>
         /// Handles the SendToUser event of the LuisEngine control.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="SendToUserEventArgs"/> instance containing the event data.</param>
-        private void LuisEngine_SendToUser(object sender, SendToUserEventArgs e)
+        /// <param name="message">The message.</param>
+        private void SendToUser(string message)
         {
-            Console.WriteLine("Bot: " + e.Message);
+            Console.WriteLine("Bot: " + message);
         }
 
         /// <summary>

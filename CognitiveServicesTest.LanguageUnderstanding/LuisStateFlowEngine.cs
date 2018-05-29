@@ -13,15 +13,12 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// <typeparam name="T"></typeparam>
     public class LuisStateFlowEngine<T>
     {
-        /// <summary>
-        /// Occurs when [send to user].
-        /// </summary>
-        public event EventHandler<SendToUserEventArgs> SendToUser;
+        #region Fields
 
         /// <summary>
         /// The path
         /// </summary>
-        private readonly StateMachine<T, string, LanguageUnderstandingRecognition> botPath;
+        private readonly StateMachine<T, string, LanguageUnderstandingRecognition> stateMachine;
 
         /// <summary>
         /// The luis client
@@ -29,9 +26,13 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         private readonly LuisClient luisClient;
 
         /// <summary>
-        /// The output strings
+        /// The state action
         /// </summary>
-        private readonly Dictionary<T, string> outputStrings;
+        private readonly Action<T> stateAction;
+
+        #endregion Fields
+
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LuisStateFlowEngine" /> class.
@@ -43,13 +44,17 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="outputStrings">The output strings.</param>
         public LuisStateFlowEngine(string appId, string appKey, T initialState,
             StateTransition<T, string, LanguageUnderstandingRecognition>[] transitions,
-            Dictionary<T, string> outputStrings)
+            Action<T> stateAction)
         {
             this.luisClient = new LuisClient(appId, appKey);
-            this.botPath = new StateMachine<T, string, LanguageUnderstandingRecognition>(initialState);
-            this.botPath.Transitions.AddRange(transitions);
-            this.outputStrings = outputStrings;
+            this.stateMachine = new StateMachine<T, string, LanguageUnderstandingRecognition>(initialState);
+            this.stateMachine.Transitions.AddRange(transitions);
+            this.stateAction = stateAction;
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         /// <summary>
         /// Elaborates the message.
@@ -58,20 +63,8 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         public void ElaborateMessage(string message)
         {
             var result = RecognizeText(luisClient, message);
-            var nextState = this.botPath.MoveToNextState(result.EntityName, result);
-            if (this.outputStrings.ContainsKey(nextState))
-            {
-                this.OnSendToUser(this.outputStrings[nextState]);
-            }
-        }
-
-        /// <summary>
-        /// Called when [send to user].
-        /// </summary>
-        /// <param name="message">The message.</param>
-        private void OnSendToUser(string message)
-        {
-            this.SendToUser?.Invoke(this, new SendToUserEventArgs(message));
+            var nextState = this.stateMachine.MoveToNextState(result.EntityName, result);
+            stateAction?.Invoke(nextState);
         }
 
         /// <summary>
@@ -92,6 +85,8 @@ namespace CognitiveServicesTest.LanguageUnderstanding
 
             return new LanguageUnderstandingRecognition(intent.Name, entities);
         }
+
+        #endregion Methods
     }
 
     public class SendToUserEventArgs : EventArgs
