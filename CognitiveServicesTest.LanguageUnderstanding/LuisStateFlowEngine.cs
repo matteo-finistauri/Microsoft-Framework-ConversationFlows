@@ -1,9 +1,7 @@
-﻿using Microsoft.Cognitive.LUIS;
-using System;
+﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+using Microsoft.Cognitive.LUIS;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
@@ -28,7 +26,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <summary>
         /// The state action
         /// </summary>
-        private readonly Action<T> stateAction;
+        private readonly IStateBehavior<T> stateBehavior;
 
         #endregion Fields
 
@@ -44,12 +42,12 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="outputStrings">The output strings.</param>
         public LuisStateFlowEngine(string appId, string appKey, T initialState,
             IEnumerable<StateTransition<T, string, LanguageUnderstandingRecognition>> transitions,
-            Action<T> stateAction)
+            IStateBehavior<T> stateBehavior)
         {
             this.luisClient = new LuisClient(appId, appKey);
             this.stateMachine = new StateMachine<T, string, LanguageUnderstandingRecognition>(initialState);
             this.stateMachine.Transitions.AddRange(transitions);
-            this.stateAction = stateAction;
+            this.stateBehavior = stateBehavior;
         }
 
         #endregion Constructors
@@ -64,7 +62,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         {
             var recognizedData = this.RecognizeText(message);
             var nextState = this.stateMachine.MoveToNextState(recognizedData.EntityName, recognizedData);
-            this.stateAction?.Invoke(nextState);
+            this.stateBehavior?.ExecuteBehavior(nextState);
         }
 
         /// <summary>

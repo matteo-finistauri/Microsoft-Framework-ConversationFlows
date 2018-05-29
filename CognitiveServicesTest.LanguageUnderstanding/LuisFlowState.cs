@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CognitiveServicesTest.LanguageUnderstanding.Conditions;
+using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {

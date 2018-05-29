@@ -1,9 +1,7 @@
-﻿using Microsoft.Cognitive.LUIS;
+﻿using CognitiveServicesTest.LanguageUnderstanding.Conditions;
+using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
@@ -87,7 +85,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </summary>
         public MyLuisClient(string appId, string appKey)
         {
-            this.luisEngine = new LuisStateFlowEngine<State>(appId, appKey, State.InitialState, transitions, x => this.SendToUser(this.outputStrings[x]));
+            this.luisEngine = new LuisStateFlowEngine<State>(appId, appKey, State.InitialState, transitions, new UserMessageEmitter<State>(x => this.SendToUser(this.outputStrings[x])));
         }
 
         #endregion Constructors
