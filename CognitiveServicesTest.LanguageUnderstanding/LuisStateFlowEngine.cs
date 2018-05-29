@@ -43,7 +43,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="transitions">The transitions.</param>
         /// <param name="outputStrings">The output strings.</param>
         public LuisStateFlowEngine(string appId, string appKey, T initialState,
-            StateTransition<T, string, LanguageUnderstandingRecognition>[] transitions,
+            IEnumerable<StateTransition<T, string, LanguageUnderstandingRecognition>> transitions,
             Action<T> stateAction)
         {
             this.luisClient = new LuisClient(appId, appKey);
@@ -62,9 +62,9 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="message">The message.</param>
         public void ElaborateMessage(string message)
         {
-            var result = RecognizeText(luisClient, message);
-            var nextState = this.stateMachine.MoveToNextState(result.EntityName, result);
-            stateAction?.Invoke(nextState);
+            var recognizedData = this.RecognizeText(message);
+            var nextState = this.stateMachine.MoveToNextState(recognizedData.EntityName, recognizedData);
+            this.stateAction?.Invoke(nextState);
         }
 
         /// <summary>
@@ -73,9 +73,9 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="luisClient">The luis client.</param>
         /// <param name="text">The text.</param>
         /// <returns></returns>
-        private static LanguageUnderstandingRecognition RecognizeText(LuisClient luisClient, string text)
+        private LanguageUnderstandingRecognition RecognizeText(string text)
         {
-            var result = luisClient.Predict(text).Result;
+            var result = this.luisClient.Predict(text).Result;
             var intent = result.TopScoringIntent;
             Dictionary<string, string> entities = new Dictionary<string, string>();
             foreach (var entity in result.Entities)
@@ -87,25 +87,5 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         }
 
         #endregion Methods
-    }
-
-    public class SendToUserEventArgs : EventArgs
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SendToUserEventArgs" /> class.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        public SendToUserEventArgs(string message)
-        {
-            this.Message = message;
-        }
-
-        /// <summary>
-        /// Gets the message.
-        /// </summary>
-        /// <value>
-        /// The message.
-        /// </value>
-        public string Message { get; }
     }
 }

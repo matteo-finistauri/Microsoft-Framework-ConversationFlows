@@ -11,7 +11,8 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// </summary>
     internal enum State
     {
-        InitialState,
+        InitialState = 1,
+        Welcome,
         BuildingShelf,
         TwoMeters,
         BuildingArmchair

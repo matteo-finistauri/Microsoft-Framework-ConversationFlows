@@ -11,6 +11,8 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// </summary>
     public class LanguageUnderstandingRecognition
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LanguageUnderstandingRecognition" /> class.
         /// </summary>
@@ -21,6 +23,10 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             this.EntityName = entityName;
             this.Parameters = parameters;
         }
+
+        #endregion Constructors
+
+        #region Properties
 
         /// <summary>
         /// Gets the name of the entity.
@@ -38,6 +44,10 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </value>
         public Dictionary<string, string> Parameters { get; set; }
 
+        #endregion Properties
+
+        #region Methods
+
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
@@ -53,8 +63,9 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             }
 
             sb.Remove(sb.Length - 1, 1);
-
             return this.EntityName + "(" + sb.ToString() + ")";
         }
+
+        #endregion Methods
     }
 }

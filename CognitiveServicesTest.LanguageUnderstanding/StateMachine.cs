@@ -14,7 +14,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// <typeparam name="Y">The condition parameter type.</typeparam>
     public class StateMachine<T, U, Y>
     {
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Process" /> class.
@@ -25,7 +25,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             this.CurrentState = initialStatus;
         }
 
-        #endregion Constructor
+        #endregion Constructors
 
         #region Properties
 

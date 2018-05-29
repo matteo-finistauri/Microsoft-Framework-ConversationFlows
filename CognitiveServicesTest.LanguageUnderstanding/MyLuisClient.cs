@@ -12,6 +12,34 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// </summary>
     public class MyLuisClient
     {
+        #region Intents
+
+        /// <summary>
+        /// The build furniture intent
+        /// </summary>
+        private const string BUILD_FURNITURE_INTENT = "Build.Furniture";
+
+        /// <summary>
+        /// The shelf size intent
+        /// </summary>
+        private const string SHELF_SIZE_INTENT = "Shelf.Size";
+
+        #endregion Intents
+
+        #region Entities
+
+        /// <summary>
+        /// The furniture type entity
+        /// </summary>
+        private const string FURNITURE_TYPE_ENTITY = "FurnitureType";
+
+        /// <summary>
+        /// The builtin number entity
+        /// </summary>
+        private const string BUILTIN_NUMBER_ENTITY = "builtin.number";
+
+        #endregion Entities
+
         #region Fields
 
         /// <summary>
@@ -36,9 +64,13 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// The transitions
         /// </summary>
         private readonly StateTransition<State, string, LanguageUnderstandingRecognition>[] transitions = {
-            new StateTransition<State, string, LanguageUnderstandingRecognition>(State.InitialState, State.BuildingShelf, "Build.Furniture", false, (x, y, z) => IsEntityEquals(z, "FurnitureType", "shelf")),
-            new StateTransition<State, string, LanguageUnderstandingRecognition>(State.BuildingShelf, State.TwoMeters, "Shelf.Size", false, (x, y, z) => IsEntityEquals(z, "builtin.number", "two") || IsEntityEquals(z, "builtin.number", "2")),
-            new StateTransition<State, string, LanguageUnderstandingRecognition>(State.InitialState, State.BuildingArmchair, "Build.Furniture", false, (x, y, z) => IsEntityEquals(z, "FurnitureType", "armchair"))
+            new LuisFlowState<State>(State.InitialState, State.BuildingShelf, BUILD_FURNITURE_INTENT, false, new EntityBinding(FURNITURE_TYPE_ENTITY, "shelf")),
+            new LuisFlowState<State>(State.BuildingShelf, State.TwoMeters, SHELF_SIZE_INTENT, false,
+                new OrCondition<LanguageUnderstandingRecognition>(
+                new EntityBinding(BUILTIN_NUMBER_ENTITY, "two"),
+                new EntityBinding(BUILTIN_NUMBER_ENTITY, "2" ))),
+            new LuisFlowState<State>(State.InitialState, State.BuildingArmchair, BUILD_FURNITURE_INTENT, false,
+                new EntityBinding(FURNITURE_TYPE_ENTITY, "armchair" ))
         };
 
         /// <summary>
@@ -48,6 +80,8 @@ namespace CognitiveServicesTest.LanguageUnderstanding
 
         #endregion Fields
 
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MyLuisClient"/> class.
         /// </summary>
@@ -56,12 +90,16 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             this.luisEngine = new LuisStateFlowEngine<State>(appId, appKey, State.InitialState, transitions, x => this.SendToUser(this.outputStrings[x]));
         }
 
+        #endregion Constructors
+
+        #region Methods
+
         /// <summary>
         /// Executes this instance.
         /// </summary>
         public void Execute()
         {
-            foreach (var message in userInputs)
+            foreach (var message in this.userInputs)
             {
                 Console.WriteLine("User: " + message);
                 this.luisEngine.ElaborateMessage(message);
@@ -77,23 +115,6 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             Console.WriteLine("Bot: " + message);
         }
 
-        /// <summary>
-        /// Determines whether [is entity equals] [the specified recognition].
-        /// </summary>
-        /// <param name="recognition">The recognition.</param>
-        /// <param name="entityName">Name of the entity.</param>
-        /// <param name="entityValue">The entity value.</param>
-        /// <returns>
-        ///   <c>true</c> if [is entity equals] [the specified recognition]; otherwise, <c>false</c>.
-        /// </returns>
-        private static bool IsEntityEquals(LanguageUnderstandingRecognition recognition, string entityName, string entityValue)
-        {
-            if (!recognition.Parameters.TryGetValue(entityName, out string value))
-            {
-                return false;
-            }
-
-            return value == entityValue;
-        }
+        #endregion Methods
     }
 }
