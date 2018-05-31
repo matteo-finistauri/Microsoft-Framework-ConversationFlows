@@ -1,4 +1,6 @@
-﻿namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
+﻿using System.Collections.Generic;
+
+namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
 {
     /// <summary>
     ///
@@ -10,6 +12,7 @@
         /// Executes the behavior.
         /// </summary>
         /// <param name="state">The state.</param>
-        void ExecuteBehavior(T state);
+        /// <param name="context">The context.</param>
+        void ExecuteBehavior(T state, Dictionary<string, object> context);
     }
 }

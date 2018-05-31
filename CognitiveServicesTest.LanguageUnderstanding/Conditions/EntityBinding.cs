@@ -3,14 +3,14 @@
     /// <summary>
     ///
     /// </summary>
-    public class EntityBinding : IConditionOperator<LanguageUnderstandingRecognition>
+    public class IsEntityEquals : IConditionOperator<LanguageUnderstandingResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EntityBinding"/> class.
+        /// Initializes a new instance of the <see cref="IsEntityEquals"/> class.
         /// </summary>
         /// <param name="entityName">Name of the entity.</param>
         /// <param name="entityValue">The entity value.</param>
-        public EntityBinding(string entityName, string entityValue)
+        public IsEntityEquals(string entityName, string entityValue)
         {
             this.EntityName = entityName;
             this.EntityValue = entityValue;
@@ -37,7 +37,7 @@
         /// </summary>
         /// <param name="conditionObject">The condition object.</param>
         /// <returns></returns>
-        public bool Evaluate(LanguageUnderstandingRecognition conditionObject)
+        public bool Evaluate(LanguageUnderstandingResult conditionObject)
         {
             return conditionObject.Parameters[this.EntityName] == this.EntityValue;
         }

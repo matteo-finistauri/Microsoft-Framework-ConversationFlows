@@ -48,11 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassInstantiatorBehavior.cs" />
+    <Compile Include="Conditions\CombinationOperator.cs" />
     <Compile Include="Conditions\IConditionOperator.cs" />
     <Compile Include="Conditions\EntityBinding.cs" />
+    <Compile Include="Conditions\AndConditionOperator.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="Intent.cs" />
+    <Compile Include="FlowState.cs" />
+    <Compile Include="LuisFlowConfiguration.cs" />
     <Compile Include="StateMachine\IStateBehavior.cs" />
     <Compile Include="LanguageUnderstandingRecognition.cs" />
-    <Compile Include="LuisFlowState.cs" />
+    <Compile Include="LuisFlowStateTransition.cs" />
     <Compile Include="LuisStateFlowEngine.cs" />
     <Compile Include="MyLuisClient.cs" />
     <Compile Include="Conditions\OrConditionOperator.cs" />
@@ -60,7 +67,8 @@
     <Compile Include="State.cs" />
     <Compile Include="StateMachine\StateMachine.cs" />
     <Compile Include="StateMachine\StateTransition.cs" />
-    <Compile Include="UserMessageEmitter.cs" />
+    <Compile Include="ExecuteActionStateBehavior.cs" />
+    <Compile Include="ConsoleWriterBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

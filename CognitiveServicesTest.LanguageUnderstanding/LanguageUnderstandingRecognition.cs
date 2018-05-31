@@ -6,16 +6,16 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// <summary>
     ///
     /// </summary>
-    public class LanguageUnderstandingRecognition
+    public class LanguageUnderstandingResult
     {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LanguageUnderstandingRecognition" /> class.
+        /// Initializes a new instance of the <see cref="LanguageUnderstandingResult" /> class.
         /// </summary>
         /// <param name="entityName">Name of the entity.</param>
         /// <param name="parameters">The parameters.</param>
-        public LanguageUnderstandingRecognition(string entityName, Dictionary<string, string> parameters)
+        public LanguageUnderstandingResult(string entityName, Dictionary<string, string> parameters)
         {
             this.EntityName = entityName;
             this.Parameters = parameters;

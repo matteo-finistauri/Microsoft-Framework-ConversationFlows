@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<luisConfiguration>
+  <luisFlowStates>
+    <luisFlowState name="InitialState" isInitialState="true">
+      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</stateBehaviorClass>
+    </luisFlowState>
+    <luisFlowState name="BuildingShelf">
+      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</stateBehaviorClass>
+    </luisFlowState>
+    <luisFlowState name="TwoMeters">
+      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</stateBehaviorClass>
+    </luisFlowState>
+    <luisFlowState name="BuildingArmchair">
+      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</stateBehaviorClass>
+    </luisFlowState>
+  </luisFlowStates>
+
+  <luisFlowStateTransitions>
+    <luisFlowStateTransition currentState="InitialState" nextState="BuildingShelf" intent="Build.Furniture" isFinalState="false">
+      <condition>
+        <isEntityEquals name="FurnitureType" value="shelf" />
+      </condition>
+      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</stateBehaviorClass>
+    </luisFlowStateTransition>
+
+    <luisFlowStateTransition currentState="BuildingShelf" nextState="TwoMeters" intent="Shelf.Size" isFinalState="false">
+      <condition>
+        <orOperator>
+          <isEntityEquals name="builtin.number" value="two" />
+          <isEntityEquals name="builtin.number" value="2" />
+        </orOperator>
+      </condition>
+      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</stateBehaviorClass>
+    </luisFlowStateTransition>
+
+    <luisFlowStateTransition currentState="InitialState" nextState="BuildingArmchair" intent="Build.Furniture" isFinalState="false">
+      <condition>
+        <isEntityEquals name="FurnitureType" value="armchair" />
+      </condition>
+      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</stateBehaviorClass>
+    </luisFlowStateTransition>
+  </luisFlowStateTransitions>
+</luisConfiguration>

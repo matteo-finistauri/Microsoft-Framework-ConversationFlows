@@ -3,7 +3,7 @@
     /// <summary>
     ///
     /// </summary>
-    internal enum State
+    public enum State
     {
         InitialState = 1,
         Welcome,

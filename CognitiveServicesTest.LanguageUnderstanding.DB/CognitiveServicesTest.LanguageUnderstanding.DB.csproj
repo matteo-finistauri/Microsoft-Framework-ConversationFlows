@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{888DD4E5-1AD8-4CFA-866E-1032B7EF16F8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>CognitiveServicesTest</RootNamespace>
-    <AssemblyName>CognitiveServicesTest</AssemblyName>
+    <ProjectGuid>{86130398-47D9-433D-86F9-3A466365CBC2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CognitiveServicesTest.LanguageUnderstanding.DB</RootNamespace>
+    <AssemblyName>CognitiveServicesTest.LanguageUnderstanding.DB</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -49,28 +47,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LuisXmlDeserializer.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ApplicationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding.DB\CognitiveServicesTest.LanguageUnderstanding.DB.csproj">
-      <Project>{86130398-47d9-433d-86f9-3a466365cbc2}</Project>
-      <Name>CognitiveServicesTest.LanguageUnderstanding.DB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding\CognitiveServicesTest.LanguageUnderstanding.csproj">
       <Project>{e439a4aa-cf18-452e-88dc-179609ffb423}</Project>
       <Name>CognitiveServicesTest.LanguageUnderstanding</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Example.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

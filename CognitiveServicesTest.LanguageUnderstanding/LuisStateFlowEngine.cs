@@ -16,7 +16,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <summary>
         /// The path
         /// </summary>
-        private readonly StateMachine<T, string, LanguageUnderstandingRecognition> stateMachine;
+        private readonly StateMachine<T, string, LanguageUnderstandingResult> stateMachine;
 
         /// <summary>
         /// The luis client
@@ -28,6 +28,11 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </summary>
         private readonly IStateBehavior<T> stateBehavior;
 
+        /// <summary>
+        /// The context
+        /// </summary>
+        private Dictionary<string, object> context;
+
         #endregion Fields
 
         #region Constructors
@@ -38,16 +43,19 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="appId">The application identifier.</param>
         /// <param name="appKey">The application key.</param>
         /// <param name="initialState">The initial state.</param>
-        /// <param name="transitions">The transitions.</param>
-        /// <param name="outputStrings">The output strings.</param>
+        /// <param name="luisConfiguration">The luis configuration.</param>
+        /// <param name="stateBehavior">The state behavior.</param>
+        /// <param name="context">The context.</param>
         public LuisStateFlowEngine(string appId, string appKey, T initialState,
-            IEnumerable<StateTransition<T, string, LanguageUnderstandingRecognition>> transitions,
-            IStateBehavior<T> stateBehavior)
+            LuisFlowConfiguration<T> luisConfiguration,
+            IStateBehavior<T> stateBehavior, Dictionary<string, object> context)
         {
             this.luisClient = new LuisClient(appId, appKey);
-            this.stateMachine = new StateMachine<T, string, LanguageUnderstandingRecognition>(initialState);
-            this.stateMachine.Transitions.AddRange(transitions);
+            this.stateMachine = new StateMachine<T, string, LanguageUnderstandingResult>(initialState);
+            this.stateMachine.Transitions.AddRange(luisConfiguration.Transitions);
             this.stateBehavior = stateBehavior;
+            this.context = context;
+            this.stateBehavior?.ExecuteBehavior(initialState, context);
         }
 
         #endregion Constructors
@@ -62,7 +70,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         {
             var recognizedData = this.RecognizeText(message);
             var nextState = this.stateMachine.MoveToNextState(recognizedData.EntityName, recognizedData);
-            this.stateBehavior?.ExecuteBehavior(nextState);
+            this.stateBehavior?.ExecuteBehavior(nextState, context);
         }
 
         /// <summary>
@@ -71,7 +79,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="luisClient">The luis client.</param>
         /// <param name="text">The text.</param>
         /// <returns></returns>
-        private LanguageUnderstandingRecognition RecognizeText(string text)
+        private LanguageUnderstandingResult RecognizeText(string text)
         {
             var result = this.luisClient.Predict(text).Result;
             var intent = result.TopScoringIntent;
@@ -81,7 +89,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
                 entities.Add(entity.Key, entity.Value.First().Value);
             }
 
-            return new LanguageUnderstandingRecognition(intent.Name, entities);
+            return new LanguageUnderstandingResult(intent.Name, entities);
         }
 
         #endregion Methods
