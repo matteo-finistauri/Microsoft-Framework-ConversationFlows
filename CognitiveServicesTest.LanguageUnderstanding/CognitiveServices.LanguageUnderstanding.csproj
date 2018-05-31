@@ -7,8 +7,8 @@
     <ProjectGuid>{E439A4AA-CF18-452E-88DC-179609FFB423}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CognitiveServicesTest.LanguageUnderstanding</RootNamespace>
-    <AssemblyName>CognitiveServicesTest.LanguageUnderstanding</AssemblyName>
+    <RootNamespace>CognitiveServices.LanguageUnderstanding</RootNamespace>
+    <AssemblyName>CognitiveServices.LanguageUnderstanding</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
