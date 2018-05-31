@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
     public class ClassInstantiatorBehavior : IStateBehavior<FlowState>
     {
         /// <summary>
@@ -23,39 +27,20 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </exception>
         public void ExecuteBehavior(FlowState state, Dictionary<string, object> context)
         {
+            if (state.BehaviorType == null)
+            {
+                return;
+            }
+
             var behavior = Activator.CreateInstance(state.BehaviorType) as IStateBehavior<FlowState>;
             if (behavior == null)
             {
                 throw new Exception("Type is not IStateBehavior<" + typeof(FlowState).Name + ">.");
             }
 
-            IEnumerable<string> requiredObjects = GetRequiredObjects(state.BehaviorType);
-            foreach (var item in requiredObjects)
-            {
-                if (!context.ContainsKey(item))
-                {
-                    throw new Exception("Object '" + item + "' is needed in the context for behavior of state '" + state.Name + "' but it's not provided.");
-                }
-            }
-
+            StateAttributesHelper.VerifyRequiredAttributes(state, context.Keys);
             behavior.ExecuteBehavior(state, context);
-        }
-
-        private IEnumerable<string> GetRequiredObjects(Type behaviorType)
-        {
-            List<string> requiredObject = new List<string>();
-            Dictionary<string, string> _dict = new Dictionary<string, string>();
-            object[] attrs = behaviorType.GetCustomAttributes(true);
-            foreach (object attr in attrs)
-            {
-                var authAttr = attr as RequiresAttribute;
-                if (authAttr != null)
-                {
-                    requiredObject.AddRange(authAttr.RequiredObjects);
-                }
-            }
-
-            return requiredObject;
+            StateAttributesHelper.VerifyProvidedAttributes(state, context.Keys);
         }
     }
 }

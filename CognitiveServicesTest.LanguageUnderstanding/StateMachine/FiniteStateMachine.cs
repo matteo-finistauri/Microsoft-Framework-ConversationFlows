@@ -10,17 +10,45 @@ namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
     /// <typeparam name="T">The state type.</typeparam>
     /// <typeparam name="U">The action type.</typeparam>
     /// <typeparam name="Y">The condition parameter type.</typeparam>
-    public class StateMachine<T, U, Y>
+    public class FiniteStateMachine<T, U, Y>
     {
         #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Process" /> class.
         /// </summary>
-        /// <param name="initialStatus">The initial status.</param>
-        public StateMachine(T initialStatus)
+        /// <param name="initialState">The initial status.</param>
+        /// <param name="transitions">The transitions.</param>
+        public FiniteStateMachine(T initialState, IEnumerable<StateTransition<T, U, Y>> transitions)
         {
-            this.CurrentState = initialStatus;
+            this.CurrentState = initialState;
+            this.Transitions = transitions;
+            BuildMachineStates(initialState, transitions);
+        }
+
+        private void BuildMachineStates(T initialState, IEnumerable<StateTransition<T, U, Y>> transitions)
+        {
+            MachineState<T, U, Y> ms = new MachineState<T, U, Y>(initialState);
+            ExploreMachineState(ms, transitions, new List<MachineState<T, U, Y>>() { ms });
+            this.InitialState = ms;
+        }
+
+        private void ExploreMachineState(MachineState<T, U, Y> ms, IEnumerable<StateTransition<T, U, Y>> transitions, List<MachineState<T, U, Y>> mss)
+        {
+            var transits = this.Transitions.Where(x => x.CurrentState.Equals(ms.State));
+            foreach (var transit in transits)
+            {
+                var destMs = mss.FirstOrDefault(x => x.State.Equals(transit.NextState));
+                if (destMs == null)
+                {
+                    destMs = new MachineState<T, U, Y>(transit.NextState);
+                    mss.Add(destMs);
+                    ExploreMachineState(destMs, transitions, mss);
+                }
+
+                var destination = new MachineStateDestination<T, U, Y>(destMs, transit.Action, transit.Condition);
+                ms.LinkedStates.Add(destination);
+            }
         }
 
         #endregion Constructors
@@ -33,7 +61,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
         /// <value>
         /// The transitions.
         /// </value>
-        public List<StateTransition<T, U, Y>> Transitions { get; } = new List<StateTransition<T, U, Y>>();
+        public IEnumerable<StateTransition<T, U, Y>> Transitions { get; private set; }
 
         /// <summary>
         /// Gets the state of the current.
@@ -42,6 +70,14 @@ namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
         /// The state of the current.
         /// </value>
         public T CurrentState { get; private set; }
+
+        /// <summary>
+        /// Gets the initial state.
+        /// </summary>
+        /// <value>
+        /// The initial state.
+        /// </value>
+        public MachineState<T, U, Y> InitialState { get; private set; }
 
         #endregion Properties
 

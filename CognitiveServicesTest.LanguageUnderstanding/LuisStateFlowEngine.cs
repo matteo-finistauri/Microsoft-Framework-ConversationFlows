@@ -1,5 +1,6 @@
 ﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
 using Microsoft.Cognitive.LUIS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,11 +13,6 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     public class LuisStateFlowEngine<T>
     {
         #region Fields
-
-        /// <summary>
-        /// The path
-        /// </summary>
-        private readonly StateMachine<T, string, LanguageUnderstandingResult> stateMachine;
 
         /// <summary>
         /// The luis client
@@ -32,6 +28,11 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// The context
         /// </summary>
         private Dictionary<string, object> context;
+
+        /// <summary>
+        /// The started
+        /// </summary>
+        private bool started;
 
         #endregion Fields
 
@@ -51,16 +52,25 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             IStateBehavior<T> stateBehavior, Dictionary<string, object> context)
         {
             this.luisClient = new LuisClient(appId, appKey);
-            this.stateMachine = new StateMachine<T, string, LanguageUnderstandingResult>(initialState);
-            this.stateMachine.Transitions.AddRange(luisConfiguration.Transitions);
+            this.StateMachine = new FiniteStateMachine<T, string, LanguageUnderstandingResult>(initialState, luisConfiguration.Transitions);
             this.stateBehavior = stateBehavior;
             this.context = context;
-            this.stateBehavior?.ExecuteBehavior(initialState, context);
         }
 
         #endregion Constructors
 
+        public FiniteStateMachine<T, string, LanguageUnderstandingResult> StateMachine { get; private set; }
+
         #region Methods
+
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
+        public void Start()
+        {
+            this.stateBehavior?.ExecuteBehavior(this.StateMachine.CurrentState, context);
+            this.started = true;
+        }
 
         /// <summary>
         /// Elaborates the message.
@@ -68,8 +78,13 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="message">The message.</param>
         public void ElaborateMessage(string message)
         {
+            if (!started)
+            {
+                throw new Exception("You must start the state flow engine before elaborating any message.");
+            }
+
             var recognizedData = this.RecognizeText(message);
-            var nextState = this.stateMachine.MoveToNextState(recognizedData.EntityName, recognizedData);
+            var nextState = this.StateMachine.MoveToNextState(recognizedData.EntityName, recognizedData);
             this.stateBehavior?.ExecuteBehavior(nextState, context);
         }
 

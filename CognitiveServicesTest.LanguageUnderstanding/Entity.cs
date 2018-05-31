@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class Entity
     {
         /// <summary>

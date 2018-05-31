@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
     [Requires(new string[] { "outputStrings" })]
     public class ConsoleWriterBehavior : IStateBehavior<FlowState>
     {
