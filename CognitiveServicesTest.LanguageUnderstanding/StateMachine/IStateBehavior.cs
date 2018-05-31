@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
+﻿namespace CognitiveServices.LanguageUnderstanding.StateMachine
 {
     /// <summary>
     ///

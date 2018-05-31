@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CognitiveServicesTest.LanguageUnderstanding.DB")]
+[assembly: AssemblyTitle("CognitiveServicesTest.LanguageUnderstanding.Xml")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CognitiveServicesTest.LanguageUnderstanding.DB")]
+[assembly: AssemblyProduct("CognitiveServicesTest.LanguageUnderstanding.Xml")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("86130398-47d9-433d-86f9-3a466365cbc2")]
+[assembly: Guid("47d51dc5-5755-43ab-acbe-26bdf3655fd6")]
 
 // Version information for an assembly consists of the following four values:
 //

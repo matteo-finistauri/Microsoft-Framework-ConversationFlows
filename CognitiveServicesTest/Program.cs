@@ -1,14 +1,11 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding;
-using CognitiveServicesTest.LanguageUnderstanding.Conditions;
-using CognitiveServicesTest.LanguageUnderstanding.DB;
-using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
-using CognitiveServicesTest.Serialization;
+﻿using CognitiveServices.LanguageUnderstanding;
+using CognitiveServices.LanguageUnderstanding.Xml;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace CognitiveServicesTest
+namespace CognitiveServices
 {
     internal class Program
     {
@@ -66,6 +63,7 @@ namespace CognitiveServicesTest
                 client.ElaborateMessage(message);
             }
 
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CognitiveServicesTest.LanguageUnderstanding.DB.Properties {
+namespace CognitiveServices.LanguageUnderstanding.DB.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

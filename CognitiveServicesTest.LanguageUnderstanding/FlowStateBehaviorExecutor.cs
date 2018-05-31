@@ -1,20 +1,17 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding;
-using CognitiveServicesTest.LanguageUnderstanding.Attributes;
-using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServices.LanguageUnderstanding;
+using CognitiveServices.LanguageUnderstanding.Attributes;
+using CognitiveServices.LanguageUnderstanding.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CognitiveServicesTest
+namespace CognitiveServices
 {
     /// <summary>
     ///
     /// </summary>
-    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.IBehaviorExecutor{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
-    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.IBehaviorExecutor{CognitiveServices.LanguageUnderstanding.FlowState}" />
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServices.LanguageUnderstanding.FlowState}" />
     public class FlowStateBehaviorExecutor : IBehaviorExecutor<FlowState>
     {
         /// <summary>

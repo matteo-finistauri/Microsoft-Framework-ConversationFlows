@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServices.LanguageUnderstanding
 {
     /// <summary>
     ///

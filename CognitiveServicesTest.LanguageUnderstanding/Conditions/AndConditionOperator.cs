@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace CognitiveServicesTest.LanguageUnderstanding.Conditions
+﻿namespace CognitiveServices.LanguageUnderstanding.Conditions
 {
     /// <summary>
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.IConditionOperator{T}" />
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.IConditionOperator{T}" />
     public class AndConditionOperator<T> : CombinationOperator<T>
     {
         /// <summary>

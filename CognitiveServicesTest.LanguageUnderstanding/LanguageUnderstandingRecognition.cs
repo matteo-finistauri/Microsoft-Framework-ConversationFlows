@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServices.LanguageUnderstanding
 {
     /// <summary>
     ///

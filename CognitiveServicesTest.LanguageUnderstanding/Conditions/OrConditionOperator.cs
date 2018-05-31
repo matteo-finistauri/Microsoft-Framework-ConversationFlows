@@ -1,4 +1,4 @@
-﻿namespace CognitiveServicesTest.LanguageUnderstanding.Conditions
+﻿namespace CognitiveServices.LanguageUnderstanding.Conditions
 {
     /// <summary>
     ///

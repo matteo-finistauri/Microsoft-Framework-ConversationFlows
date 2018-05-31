@@ -1,13 +1,13 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding.Conditions;
-using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServices.LanguageUnderstanding.Conditions;
+using CognitiveServices.LanguageUnderstanding.StateMachine;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServices.LanguageUnderstanding
 {
     /// <summary>
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateTransition{T, System.String, CognitiveServicesTest.LanguageUnderstanding.LanguageUnderstandingResult}" />
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.StateTransition{T, System.String, CognitiveServices.LanguageUnderstanding.LanguageUnderstandingResult}" />
     public class LuisFlowStateTransition<T> : StateTransition<T, string, LanguageUnderstandingResult>
     {
         /// <summary>

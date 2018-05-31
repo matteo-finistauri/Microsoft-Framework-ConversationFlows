@@ -1,17 +1,14 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding.Attributes;
-using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServices.LanguageUnderstanding.Attributes;
+using CognitiveServices.LanguageUnderstanding.StateMachine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServices.LanguageUnderstanding
 {
     /// <summary>
     ///
     /// </summary>
-    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServices.LanguageUnderstanding.FlowState}" />
     public abstract class BaseStateBehavior : IStateBehavior
     {
         /// <summary>

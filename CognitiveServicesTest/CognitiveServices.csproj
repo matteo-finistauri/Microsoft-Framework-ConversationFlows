@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleWriterBehavior.cs" />
-    <Compile Include="LuisXmlDeserializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendToBackendStateBehavior.cs" />
@@ -60,13 +59,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding.DB\CognitiveServicesTest.LanguageUnderstanding.DB.csproj">
+    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding.DB\CognitiveServices.LanguageUnderstanding.DB.csproj">
       <Project>{86130398-47d9-433d-86f9-3a466365cbc2}</Project>
-      <Name>CognitiveServicesTest.LanguageUnderstanding.DB</Name>
+      <Name>CognitiveServices.LanguageUnderstanding.DB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding\CognitiveServicesTest.LanguageUnderstanding.csproj">
+    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding.Xml\CognitiveServices.LanguageUnderstanding.Xml.csproj">
+      <Project>{47d51dc5-5755-43ab-acbe-26bdf3655fd6}</Project>
+      <Name>CognitiveServices.LanguageUnderstanding.Xml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding\CognitiveServices.LanguageUnderstanding.csproj">
       <Project>{e439a4aa-cf18-452e-88dc-179609ffb423}</Project>
-      <Name>CognitiveServicesTest.LanguageUnderstanding</Name>
+      <Name>CognitiveServices.LanguageUnderstanding</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,8 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding;
-using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServices.LanguageUnderstanding;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CognitiveServicesTest
+namespace CognitiveServices
 {
     public class SendToBackendStateBehavior : BaseStateBehavior
     {

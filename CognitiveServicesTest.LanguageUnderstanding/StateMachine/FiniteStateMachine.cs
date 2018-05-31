@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
+namespace CognitiveServices.LanguageUnderstanding.StateMachine
 {
     /// <summary>
     ///

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CognitiveServicesTest.LanguageUnderstanding.Conditions
+﻿namespace CognitiveServices.LanguageUnderstanding.Conditions
 {
     public abstract class CombinationOperator<T> : IConditionOperator<T>
     {

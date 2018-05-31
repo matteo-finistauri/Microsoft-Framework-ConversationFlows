@@ -1,11 +1,7 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
-using System;
+﻿using CognitiveServices.LanguageUnderstanding.StateMachine;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServices.LanguageUnderstanding
 {
     /// <summary>
     ///

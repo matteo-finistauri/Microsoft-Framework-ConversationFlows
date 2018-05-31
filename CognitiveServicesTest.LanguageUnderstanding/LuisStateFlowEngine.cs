@@ -1,10 +1,10 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServices.LanguageUnderstanding.StateMachine;
 using Microsoft.Cognitive.LUIS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServices.LanguageUnderstanding
 {
     /// <summary>
     ///

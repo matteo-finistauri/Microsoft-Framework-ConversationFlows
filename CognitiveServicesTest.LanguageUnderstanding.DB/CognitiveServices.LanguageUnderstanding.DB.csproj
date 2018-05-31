@@ -64,9 +64,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding\CognitiveServicesTest.LanguageUnderstanding.csproj">
+    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding\CognitiveServices.LanguageUnderstanding.csproj">
       <Project>{e439a4aa-cf18-452e-88dc-179609ffb423}</Project>
-      <Name>CognitiveServicesTest.LanguageUnderstanding</Name>
+      <Name>CognitiveServices.LanguageUnderstanding</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
