@@ -128,6 +128,16 @@ namespace CognitiveServicesTest.Serialization
         {
             LuisFlowConfiguration<FlowState> config = new LuisFlowConfiguration<FlowState>();
             config.States = GetStates(configuration);
+            var count = config.States.Count(x => x.IsInitialState);
+            if (count == 0)
+            {
+                throw new Exception("An initial state is required.");
+            }
+            else if (count > 1)
+            {
+                throw new Exception("Only one initial state is needed.");
+            }
+
             config.Transitions = GetTransitions(config.States, configuration);
             return config;
         }
@@ -147,9 +157,11 @@ namespace CognitiveServicesTest.Serialization
             var states = new List<FlowState>();
             foreach (var item in configuration.LuisFlowStates.List)
             {
-                var state = new FlowState();
-                state.Name = item.Name;
-                state.IsInitialState = item.IsInitialState;
+                var state = new FlowState
+                {
+                    Name = item.Name,
+                    IsInitialState = item.IsInitialState
+                };
                 if (item.StateBehaviorClass != null)
                 {
                     Type type = Type.GetType(item.StateBehaviorClass);
@@ -157,6 +169,7 @@ namespace CognitiveServicesTest.Serialization
                     {
                         throw new Exception("Type '" + item.StateBehaviorClass + "' not found.");
                     }
+
                     var isImplementing = type.GetInterfaces().Contains(typeof(IStateBehavior));
                     if (!isImplementing)
                     {
@@ -229,9 +242,9 @@ namespace CognitiveServicesTest.Serialization
         /// </summary>
         /// <param name="inputAndOperator">The input and operator.</param>
         /// <returns></returns>
-        private static AndCondition<LanguageUnderstandingResult> ProcessAndOperator(AndOperator inputAndOperator)
+        private static AndConditionOperator<LanguageUnderstandingResult> ProcessAndOperator(AndOperator inputAndOperator)
         {
-            var andOperator = new CognitiveServicesTest.LanguageUnderstanding.Conditions.AndCondition<LanguageUnderstandingResult>();
+            var andOperator = new CognitiveServicesTest.LanguageUnderstanding.Conditions.AndConditionOperator<LanguageUnderstandingResult>();
             var operators = ProcessSuboperators(inputAndOperator);
             andOperator.Operators = operators.ToArray();
             return andOperator;
@@ -244,7 +257,7 @@ namespace CognitiveServicesTest.Serialization
         /// <returns></returns>
         private static IConditionOperator<LanguageUnderstandingResult> ProcessOrOperator(OrOperator op)
         {
-            var orOperator = new CognitiveServicesTest.LanguageUnderstanding.Conditions.OrCondition<LanguageUnderstandingResult>();
+            var orOperator = new CognitiveServicesTest.LanguageUnderstanding.Conditions.OrConditionOperator<LanguageUnderstandingResult>();
             var operators = ProcessSuboperators(op);
             orOperator.Operators = operators.ToArray();
             return orOperator;
@@ -292,7 +305,7 @@ namespace CognitiveServicesTest.Serialization
         /// <returns></returns>
         private static IConditionOperator<LanguageUnderstandingResult> ProcessIsEntityEqualsOperator(IsEntityEquals op)
         {
-            return new CognitiveServicesTest.LanguageUnderstanding.Conditions.IsEntityEquals(op.Name, op.Value);
+            return new CognitiveServicesTest.LanguageUnderstanding.Conditions.IsEntityEqualsCondition(op.Name, op.Value);
         }
     }
 }

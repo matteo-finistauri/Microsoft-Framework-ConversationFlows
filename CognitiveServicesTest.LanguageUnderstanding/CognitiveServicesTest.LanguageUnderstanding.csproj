@@ -49,31 +49,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseStateBehavior.cs" />
-    <Compile Include="ClassInstantiator.cs" />
+    <Compile Include="FlowStateBehaviorExecutor.cs" />
     <Compile Include="Conditions\CombinationOperator.cs" />
     <Compile Include="Conditions\IConditionOperator.cs" />
     <Compile Include="Conditions\EntityBinding.cs" />
     <Compile Include="Conditions\AndConditionOperator.cs" />
-    <Compile Include="Entity.cs" />
     <Compile Include="IBehaviorExecutor.cs" />
-    <Compile Include="Intent.cs" />
     <Compile Include="FlowState.cs" />
     <Compile Include="LuisFlowConfiguration.cs" />
-    <Compile Include="ProvidesAttribute.cs" />
-    <Compile Include="RequiresAttribute.cs" />
-    <Compile Include="StateAttributesHelper.cs" />
+    <Compile Include="Attributes\ProvidesAttribute.cs" />
+    <Compile Include="Attributes\RequiresAttribute.cs" />
+    <Compile Include="Attributes\StateAttributesHelper.cs" />
     <Compile Include="StateMachine\IStateBehavior.cs" />
     <Compile Include="LanguageUnderstandingRecognition.cs" />
     <Compile Include="LuisFlowStateTransition.cs" />
     <Compile Include="LuisStateFlowEngine.cs" />
-    <Compile Include="MyLuisClient.cs" />
+    <Compile Include="LuisCommunicationManager.cs" />
     <Compile Include="Conditions\OrConditionOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateMachine\FiniteStateMachine.cs" />
     <Compile Include="StateMachine\MachineState.cs" />
     <Compile Include="StateMachine\MachineStateDestination.cs" />
     <Compile Include="StateMachine\StateTransition.cs" />
-    <Compile Include="ConsoleWriterBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

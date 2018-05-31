@@ -75,8 +75,11 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </summary>
         public void Start()
         {
-            this.stateBehavior.ExecuteBehavior(this.StateMachine.CurrentState, this.context);
-            this.started = true;
+            if (!this.started)
+            {
+                this.stateBehavior.ExecuteBehavior(this.StateMachine.CurrentState, this.context);
+                this.started = true;
+            }
         }
 
         /// <summary>

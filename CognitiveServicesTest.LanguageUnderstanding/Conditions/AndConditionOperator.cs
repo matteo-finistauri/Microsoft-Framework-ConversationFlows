@@ -7,20 +7,20 @@ namespace CognitiveServicesTest.LanguageUnderstanding.Conditions
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.IConditionOperator{T}" />
-    public class AndCondition<T> : CombinationOperator<T>
+    public class AndConditionOperator<T> : CombinationOperator<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AndCondition{T}"/> class.
+        /// Initializes a new instance of the <see cref="AndConditionOperator{T}"/> class.
         /// </summary>
-        public AndCondition()
+        public AndConditionOperator()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AndCondition{T}"/> class.
+        /// Initializes a new instance of the <see cref="AndConditionOperator{T}"/> class.
         /// </summary>
         /// <param name="operators">The operators.</param>
-        public AndCondition(params IConditionOperator<T>[] operators)
+        public AndConditionOperator(params IConditionOperator<T>[] operators)
             : base(operators)
         {
         }

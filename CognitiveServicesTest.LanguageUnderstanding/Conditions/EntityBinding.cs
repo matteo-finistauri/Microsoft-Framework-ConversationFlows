@@ -3,14 +3,14 @@
     /// <summary>
     ///
     /// </summary>
-    public class IsEntityEquals : IConditionOperator<LanguageUnderstandingResult>
+    public class IsEntityEqualsCondition : IConditionOperator<LanguageUnderstandingResult>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IsEntityEquals"/> class.
+        /// Initializes a new instance of the <see cref="IsEntityEqualsCondition"/> class.
         /// </summary>
         /// <param name="entityName">Name of the entity.</param>
         /// <param name="entityValue">The entity value.</param>
-        public IsEntityEquals(string entityName, string entityValue)
+        public IsEntityEqualsCondition(string entityName, string entityValue)
         {
             this.EntityName = entityName;
             this.EntityValue = entityValue;

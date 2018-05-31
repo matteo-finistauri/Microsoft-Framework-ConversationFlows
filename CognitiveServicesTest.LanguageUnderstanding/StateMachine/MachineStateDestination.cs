@@ -8,15 +8,15 @@ namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="U"></typeparam>
     /// <typeparam name="Y"></typeparam>
-    public class MachineStateDestination<T, U, Y>
+    public class MachineStateLink<T, U, Y>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MachineStateDestination{T, U, Y}"/> class.
+        /// Initializes a new instance of the <see cref="MachineStateLink{T, U, Y}"/> class.
         /// </summary>
         /// <param name="destinationState">State of the destination.</param>
         /// <param name="action">The action.</param>
         /// <param name="condition">The condition.</param>
-        public MachineStateDestination(MachineState<T, U, Y> destinationState, U action, Func<T, U, Y, bool> condition = null)
+        public MachineStateLink(MachineState<T, U, Y> destinationState, U action, Func<T, U, Y, bool> condition = null)
         {
             this.DestinationState = destinationState;
             this.Action = action;

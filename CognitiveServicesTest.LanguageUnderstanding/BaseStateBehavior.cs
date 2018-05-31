@@ -1,4 +1,5 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServicesTest.LanguageUnderstanding.Attributes;
+using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <value>
         /// The state.
         /// </value>
-        public FlowState State { get; }
+        protected FlowState State { get; }
 
         /// <summary>
         /// Gets the context object.
@@ -52,10 +53,10 @@ namespace CognitiveServicesTest.LanguageUnderstanding
                 return null;
             }
 
-            U obj = this.context[key] as U;
+            var obj = this.context[key] as U;
             if (obj == null)
             {
-                throw new InvalidCastException("Cast to type " + typeof(U).FullName + " is incorrect.");
+                throw new InvalidCastException($"Cast of context object with key '{key}' to type {typeof(U).FullName} is incorrect.");
             }
 
             return obj;

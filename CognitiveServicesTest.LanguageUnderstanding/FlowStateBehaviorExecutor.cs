@@ -1,4 +1,6 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServicesTest.LanguageUnderstanding;
+using CognitiveServicesTest.LanguageUnderstanding.Attributes;
+using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +8,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServicesTest
 {
     /// <summary>
     ///
     /// </summary>
     /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.IBehaviorExecutor{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
     /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
-    public class ClassInstantiator : IBehaviorExecutor<FlowState>
+    public class FlowStateBehaviorExecutor : IBehaviorExecutor<FlowState>
     {
         /// <summary>
         /// Executes the behavior.

@@ -12,34 +12,6 @@ namespace CognitiveServicesTest
 {
     internal class Program
     {
-        //#region Intents
-
-        ///// <summary>
-        ///// The build furniture intent
-        ///// </summary>
-        //private const string BUILD_FURNITURE_INTENT = "Build.Furniture";
-
-        ///// <summary>
-        ///// The shelf size intent
-        ///// </summary>
-        //private const string SHELF_SIZE_INTENT = "Shelf.Size";
-
-        //#endregion Intents
-
-        //#region Entities
-
-        ///// <summary>
-        ///// The furniture type entity
-        ///// </summary>
-        //private const string FURNITURE_TYPE_ENTITY = "FurnitureType";
-
-        ///// <summary>
-        ///// The builtin number entity
-        ///// </summary>
-        //private const string BUILTIN_NUMBER_ENTITY = "builtin.number";
-
-        //#endregion Entities
-
         /// <summary>
         /// The output strings
         /// </summary>
@@ -51,17 +23,12 @@ namespace CognitiveServicesTest
         };
 
         /// <summary>
-        /// The transitions
+        /// The user inputs
         /// </summary>
-        //private static readonly StateTransition<State, string, LanguageUnderstandingResult>[] transitions = {
-        //    new LuisFlowStateTransition<State>(State.InitialState, State.BuildingShelf, BUILD_FURNITURE_INTENT, false, new IsEntityEquals(FURNITURE_TYPE_ENTITY, "shelf")),
-        //    new LuisFlowStateTransition<State>(State.BuildingShelf, State.TwoMeters, SHELF_SIZE_INTENT, false,
-        //        new OrCondition<LanguageUnderstandingResult>(new IConditionOperator<LanguageUnderstandingResult>[]{
-        //        new IsEntityEquals(BUILTIN_NUMBER_ENTITY, "two"),
-        //        new IsEntityEquals(BUILTIN_NUMBER_ENTITY, "2" )})),
-        //    new LuisFlowStateTransition<State>(State.InitialState, State.BuildingArmchair, BUILD_FURNITURE_INTENT, false,
-        //        new IsEntityEquals(FURNITURE_TYPE_ENTITY, "armchair" ))
-        //};
+        private readonly static string[] userInputs = {
+            "Hi Luis, can you help me to build my shelf?",
+            "It's 2 meters."
+        };
 
         /// <summary>
         /// The filename
@@ -84,12 +51,29 @@ namespace CognitiveServicesTest
                 configuration = (LuisConfiguration)serializer.Deserialize(reader);
             }
 
+            var context = new Dictionary<string, object>
+            {
+                { "outputStrings", outputStrings }
+            };
+
             var luisConfiguration = StatesConverter.Convert(configuration);
-            MyLuisClient client = new MyLuisClient(
+            LuisCommunicationManager client = new LuisCommunicationManager(
                 "a9777fd2-0c56-4a76-b3b4-740b387c05d5", "0c13af8b1228447bb2ce26e7be709940",
-                luisConfiguration, outputStrings);
-            client.Execute();
+                luisConfiguration, context);
+            foreach (var message in userInputs)
+            {
+                Console.WriteLine("User: " + message);
+                client.ElaborateMessage(message);
+            }
+
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Executes this instance.
+        /// </summary>
+        private static void Execute()
+        {
         }
     }
 }

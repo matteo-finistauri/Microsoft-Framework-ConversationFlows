@@ -4,20 +4,20 @@
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class OrCondition<T> : CombinationOperator<T>
+    public class OrConditionOperator<T> : CombinationOperator<T>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrCondition{T}"/> class.
+        /// Initializes a new instance of the <see cref="OrConditionOperator{T}"/> class.
         /// </summary>
-        public OrCondition()
+        public OrConditionOperator()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrCondition{T}"/> class.
+        /// Initializes a new instance of the <see cref="OrConditionOperator{T}"/> class.
         /// </summary>
         /// <param name="operators">The operators.</param>
-        public OrCondition(params IConditionOperator<T>[] operators)
+        public OrConditionOperator(params IConditionOperator<T>[] operators)
             : base(operators)
         {
         }

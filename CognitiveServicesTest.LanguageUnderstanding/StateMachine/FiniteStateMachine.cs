@@ -23,32 +23,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
         {
             this.CurrentState = initialState;
             this.Transitions = transitions;
-            BuildMachineStates(initialState, transitions);
-        }
-
-        private void BuildMachineStates(T initialState, IEnumerable<StateTransition<T, U, Y>> transitions)
-        {
-            MachineState<T, U, Y> ms = new MachineState<T, U, Y>(initialState);
-            ExploreMachineState(ms, transitions, new List<MachineState<T, U, Y>>() { ms });
-            this.InitialState = ms;
-        }
-
-        private void ExploreMachineState(MachineState<T, U, Y> ms, IEnumerable<StateTransition<T, U, Y>> transitions, List<MachineState<T, U, Y>> mss)
-        {
-            var transits = this.Transitions.Where(x => x.CurrentState.Equals(ms.State));
-            foreach (var transit in transits)
-            {
-                var destMs = mss.FirstOrDefault(x => x.State.Equals(transit.NextState));
-                if (destMs == null)
-                {
-                    destMs = new MachineState<T, U, Y>(transit.NextState);
-                    mss.Add(destMs);
-                    ExploreMachineState(destMs, transitions, mss);
-                }
-
-                var destination = new MachineStateDestination<T, U, Y>(destMs, transit.Action, transit.Condition);
-                ms.LinkedStates.Add(destination);
-            }
+            this.BuildMachineStateNet(initialState, transitions);
         }
 
         #endregion Constructors
@@ -118,6 +93,40 @@ namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
             }
 
             return validTransitions.First();
+        }
+
+        /// <summary>
+        /// Builds the machine states.
+        /// </summary>
+        /// <param name="initialState">The initial state.</param>
+        /// <param name="transitions">The transitions.</param>
+        private void BuildMachineStateNet(T initialState, IEnumerable<StateTransition<T, U, Y>> transitions)
+        {
+            var initialMachineState = new MachineState<T, U, Y>(initialState);
+            this.ExploreMachineState(initialMachineState, transitions, new List<MachineState<T, U, Y>>() { initialMachineState });
+            this.InitialState = initialMachineState;
+        }
+
+        /// <summary>
+        /// Explores the state of the machine.
+        /// </summary>
+        /// <param name="transitions">The transitions.</param>
+        private void ExploreMachineState(MachineState<T, U, Y> currentMachineState, IEnumerable<StateTransition<T, U, Y>> transitions, List<MachineState<T, U, Y>> alreadyExploredStates)
+        {
+            var currentStateTransitions = this.Transitions.Where(x => x.CurrentState.Equals(currentMachineState.State));
+            foreach (var currentStateTransition in currentStateTransitions)
+            {
+                var destinationMachineState = alreadyExploredStates.FirstOrDefault(x => x.State.Equals(currentStateTransition.NextState));
+                if (destinationMachineState == null)
+                {
+                    destinationMachineState = new MachineState<T, U, Y>(currentStateTransition.NextState);
+                    alreadyExploredStates.Add(destinationMachineState);
+                    ExploreMachineState(destinationMachineState, transitions, alreadyExploredStates);
+                }
+
+                var destination = new MachineStateLink<T, U, Y>(destinationMachineState, currentStateTransition.Action, currentStateTransition.Condition);
+                currentMachineState.Links.Add(destination);
+            }
         }
 
         #endregion Methods

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CognitiveServicesTest.LanguageUnderstanding
+namespace CognitiveServicesTest.LanguageUnderstanding.Attributes
 {
     /// <summary>
     ///

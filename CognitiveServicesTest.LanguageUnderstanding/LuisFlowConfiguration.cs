@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LuisFlowConfiguration<T>
     {
         /// <summary>

@@ -2,16 +2,16 @@
 <luisConfiguration>
   <luisFlowStates>
     <luisFlowState name="InitialState" isInitialState="true">
-      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding</stateBehaviorClass>
+      <stateBehaviorClass>CognitiveServicesTest.ConsoleWriterBehavior, CognitiveServicesTest</stateBehaviorClass>
     </luisFlowState>
     <luisFlowState name="BuildingShelf">
-      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding</stateBehaviorClass>
+      <stateBehaviorClass>CognitiveServicesTest.ConsoleWriterBehavior, CognitiveServicesTest</stateBehaviorClass>
     </luisFlowState>
     <luisFlowState name="TwoMeters">
       <stateBehaviorClass>CognitiveServicesTest.SendToBackendStateBehavior, CognitiveServicesTest</stateBehaviorClass>
     </luisFlowState>
     <luisFlowState name="BuildingArmchair">
-      <stateBehaviorClass>CognitiveServicesTest.LanguageUnderstanding.ConsoleWriterBehavior, CognitiveServicesTest.LanguageUnderstanding</stateBehaviorClass>
+      <stateBehaviorClass>CognitiveServicesTest.ConsoleWriterBehavior, CognitiveServicesTest</stateBehaviorClass>
     </luisFlowState>
   </luisFlowStates>
 
