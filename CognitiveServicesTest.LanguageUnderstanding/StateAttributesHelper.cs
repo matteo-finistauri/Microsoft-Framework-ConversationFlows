@@ -19,7 +19,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="state">The state.</param>
         /// <param name="context">The context.</param>
         /// <exception cref="Exception">Object '" + item + "' is needed in the context for behavior of state '" + state.Name + "' but it's not provided.</exception>
-        public static void VerifyRequiredAttributes(FlowState state, IEnumerable<string> keys)
+        public static void VerifyRequiredAttributes(FlowState state, params string[] keys)
         {
             if (state.BehaviorType == null)
             {
@@ -42,7 +42,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="state">The state.</param>
         /// <param name="context">The context.</param>
         /// <exception cref="Exception">The context for behavior of state '" + state.Name + "' should provide the object '" + item + "' but it's not provided.</exception>
-        public static void VerifyProvidedAttributes(FlowState state, IEnumerable<string> keys)
+        public static void VerifyProvidedAttributes(FlowState state, params string[] keys)
         {
             if (state.BehaviorType == null)
             {

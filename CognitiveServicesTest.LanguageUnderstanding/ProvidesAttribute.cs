@@ -2,6 +2,10 @@
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <seealso cref="System.Attribute" />
     public class ProvidesAttribute : Attribute
     {
         /// <summary>

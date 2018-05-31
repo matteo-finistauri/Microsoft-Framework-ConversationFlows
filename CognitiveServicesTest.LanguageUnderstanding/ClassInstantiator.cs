@@ -11,20 +11,16 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// <summary>
     ///
     /// </summary>
+    /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.IBehaviorExecutor{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
     /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
-    public class ClassInstantiatorBehavior : IStateBehavior<FlowState>
+    public class ClassInstantiator : IBehaviorExecutor<FlowState>
     {
         /// <summary>
         /// Executes the behavior.
         /// </summary>
         /// <param name="state">The state.</param>
         /// <param name="context">The context.</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">
-        /// Type not found.
-        /// or
-        /// Type is not IStateBehavior<" + typeof(T).Name + ">.
-        /// </exception>
+        /// <exception cref="Exception"></exception>
         public void ExecuteBehavior(FlowState state, Dictionary<string, object> context)
         {
             if (state.BehaviorType == null)
@@ -32,15 +28,15 @@ namespace CognitiveServicesTest.LanguageUnderstanding
                 return;
             }
 
-            var behavior = Activator.CreateInstance(state.BehaviorType) as IStateBehavior<FlowState>;
+            var behavior = Activator.CreateInstance(state.BehaviorType, state, context) as IStateBehavior;
             if (behavior == null)
             {
-                throw new Exception("Type is not IStateBehavior<" + typeof(FlowState).Name + ">.");
+                throw new Exception($"Type '{state.BehaviorType}' is not {typeof(IStateBehavior).Name}.");
             }
 
-            StateAttributesHelper.VerifyRequiredAttributes(state, context.Keys);
-            behavior.ExecuteBehavior(state, context);
-            StateAttributesHelper.VerifyProvidedAttributes(state, context.Keys);
+            StateAttributesHelper.VerifyRequiredAttributes(state, context.Keys.ToArray());
+            behavior.ExecuteBehavior();
+            StateAttributesHelper.VerifyProvidedAttributes(state, context.Keys.ToArray());
         }
     }
 }

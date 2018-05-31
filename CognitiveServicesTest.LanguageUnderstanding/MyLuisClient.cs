@@ -1,5 +1,4 @@
-﻿using CognitiveServicesTest.LanguageUnderstanding.Conditions;
-using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +35,9 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         public MyLuisClient(string appId, string appKey, LuisFlowConfiguration<FlowState> luisFlowConfiguration, Dictionary<string, string> outputStrings)
         {
             var initialState = luisFlowConfiguration.States.First(x => x.IsInitialState);
-            Dictionary<string, object> context = new Dictionary<string, object>();
+            var context = new Dictionary<string, object>();
             context.Add("outputStrings", outputStrings);
-            this.luisEngine = new LuisStateFlowEngine<FlowState>(appId, appKey, initialState, luisFlowConfiguration, new ClassInstantiatorBehavior(), context);
+            this.luisEngine = new LuisStateFlowEngine<FlowState>(appId, appKey, initialState, luisFlowConfiguration, new ClassInstantiator(), context);
             PerformStaticVerification(context.Keys);
             this.luisEngine.Start();
         }
@@ -59,7 +58,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="existingKeys">The existing keys.</param>
         private void VerifyRequiredConsistency(MachineState<FlowState, string, LanguageUnderstandingResult> state, IEnumerable<string> existingKeys)
         {
-            StateAttributesHelper.VerifyRequiredAttributes(state.State, existingKeys);
+            StateAttributesHelper.VerifyRequiredAttributes(state.State, existingKeys.ToArray());
             var providedObjects = StateAttributesHelper.GetProvidedObjectsKeys(state.State.BehaviorType);
             var newExistingKeys = new List<string>(existingKeys.ToArray());
             foreach (var destination in state.LinkedStates)

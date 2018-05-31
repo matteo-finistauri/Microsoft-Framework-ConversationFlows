@@ -157,10 +157,10 @@ namespace CognitiveServicesTest.Serialization
                     {
                         throw new Exception("Type '" + item.StateBehaviorClass + "' not found.");
                     }
-                    var isImplementing = type.GetInterfaces().Contains(typeof(IStateBehavior<FlowState>));
+                    var isImplementing = type.GetInterfaces().Contains(typeof(IStateBehavior));
                     if (!isImplementing)
                     {
-                        throw new Exception("Type '" + item.StateBehaviorClass + "' is not IStateBehavior<" + typeof(FlowState).Name + ">.");
+                        throw new Exception("Type '" + item.StateBehaviorClass + "' is not IStateBehavior.");
                     }
 
                     state.BehaviorType = type;

@@ -6,13 +6,11 @@ namespace CognitiveServicesTest.LanguageUnderstanding.StateMachine
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IStateBehavior<T>
+    public interface IStateBehavior
     {
         /// <summary>
         /// Executes the behavior.
         /// </summary>
-        /// <param name="state">The state.</param>
-        /// <param name="context">The context.</param>
-        void ExecuteBehavior(T state, Dictionary<string, object> context);
+        void ExecuteBehavior();
     }
 }

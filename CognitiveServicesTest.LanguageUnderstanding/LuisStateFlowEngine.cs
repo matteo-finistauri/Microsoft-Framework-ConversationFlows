@@ -22,12 +22,12 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <summary>
         /// The state action
         /// </summary>
-        private readonly IStateBehavior<T> stateBehavior;
+        private readonly IBehaviorExecutor<T> stateBehavior;
 
         /// <summary>
         /// The context
         /// </summary>
-        private Dictionary<string, object> context;
+        private readonly Dictionary<string, object> context;
 
         /// <summary>
         /// The started
@@ -49,16 +49,23 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <param name="context">The context.</param>
         public LuisStateFlowEngine(string appId, string appKey, T initialState,
             LuisFlowConfiguration<T> luisConfiguration,
-            IStateBehavior<T> stateBehavior, Dictionary<string, object> context)
+            IBehaviorExecutor<T> behaviorExecutor,
+            Dictionary<string, object> context)
         {
             this.luisClient = new LuisClient(appId, appKey);
             this.StateMachine = new FiniteStateMachine<T, string, LanguageUnderstandingResult>(initialState, luisConfiguration.Transitions);
-            this.stateBehavior = stateBehavior;
+            this.stateBehavior = behaviorExecutor;
             this.context = context;
         }
 
         #endregion Constructors
 
+        /// <summary>
+        /// Gets the state machine.
+        /// </summary>
+        /// <value>
+        /// The state machine.
+        /// </value>
         public FiniteStateMachine<T, string, LanguageUnderstandingResult> StateMachine { get; private set; }
 
         #region Methods
@@ -68,7 +75,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// </summary>
         public void Start()
         {
-            this.stateBehavior?.ExecuteBehavior(this.StateMachine.CurrentState, context);
+            this.stateBehavior.ExecuteBehavior(this.StateMachine.CurrentState, this.context);
             this.started = true;
         }
 

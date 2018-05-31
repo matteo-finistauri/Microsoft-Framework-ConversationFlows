@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesTest
 {
-    public class SendToBackendStateBehavior : IStateBehavior<FlowState>
+    public class SendToBackendStateBehavior : BaseStateBehavior
     {
-        private static void SendToBackend(FlowState state, Dictionary<string, object> context)
+        public SendToBackendStateBehavior(FlowState state, Dictionary<string, object> context)
+            : base(state, context)
         {
         }
 
-        public void ExecuteBehavior(FlowState state, Dictionary<string, object> context)
+        public override void ExecuteBehavior()
         {
             Console.WriteLine("Sent to the backend.");
         }

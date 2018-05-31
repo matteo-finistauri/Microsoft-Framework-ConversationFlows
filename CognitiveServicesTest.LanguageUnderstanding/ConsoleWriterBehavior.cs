@@ -12,17 +12,25 @@ namespace CognitiveServicesTest.LanguageUnderstanding
     /// </summary>
     /// <seealso cref="CognitiveServicesTest.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServicesTest.LanguageUnderstanding.FlowState}" />
     [Requires(new string[] { "outputStrings" })]
-    public class ConsoleWriterBehavior : IStateBehavior<FlowState>
+    public class ConsoleWriterBehavior : BaseStateBehavior
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleWriterBehavior"/> class.
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="context">The context.</param>
+        public ConsoleWriterBehavior(FlowState state, Dictionary<string, object> context)
+            : base(state, context)
+        {
+        }
+
         /// <summary>
         /// Executes the behavior.
         /// </summary>
-        /// <param name="state">The state.</param>
-        /// <param name="context">The context.</param>
-        public void ExecuteBehavior(FlowState state, Dictionary<string, object> context)
+        public override void ExecuteBehavior()
         {
-            var outputStrings = (Dictionary<string, string>)context["outputStrings"];
-            Console.WriteLine("Bot: " + outputStrings[state.Name]);
+            var outputStrings = this.GetContextObject<Dictionary<string, string>>("outputStrings");
+            Console.WriteLine("Bot: " + outputStrings[this.State.Name]);
         }
     }
 }
