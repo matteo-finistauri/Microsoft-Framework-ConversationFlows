@@ -14,13 +14,13 @@ namespace CognitiveServicesTest.LanguageUnderstanding
         /// <summary>
         /// The behavior action
         /// </summary>
-        private readonly Func<T, Dictionary<string, object>, object> behaviorAction;
+        private readonly Action<T, Dictionary<string, object>> behaviorAction;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExecuteActionStateBehavior{T}" /> class.
         /// </summary>
         /// <param name="behaviorAction">The behavior action.</param>
-        public ExecuteActionStateBehavior(Func<T, Dictionary<string, object>, object> behaviorAction)
+        public ExecuteActionStateBehavior(Action<T, Dictionary<string, object>> behaviorAction)
         {
             this.behaviorAction = behaviorAction;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CognitiveServicesTest.LanguageUnderstanding.StateMachine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,25 +7,18 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesTest.LanguageUnderstanding
 {
-    public class ConsoleWriterBehavior : ExecuteActionStateBehavior<FlowState>
+    [Requires(new string[] { "outputStrings" })]
+    public class ConsoleWriterBehavior : IStateBehavior<FlowState>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConsoleWriterBehavior"/> class.
+        /// Executes the behavior.
         /// </summary>
-        public ConsoleWriterBehavior()
-            : base((x, y) => SendToUser(x, y))
-        {
-        }
-
-        /// <summary>
-        /// Handles the SendToUser event of the LuisEngine control.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        private static object SendToUser(FlowState state, Dictionary<string, object> context)
+        /// <param name="state">The state.</param>
+        /// <param name="context">The context.</param>
+        public void ExecuteBehavior(FlowState state, Dictionary<string, object> context)
         {
             var outputStrings = (Dictionary<string, string>)context["outputStrings"];
             Console.WriteLine("Bot: " + outputStrings[state.Name]);
-            return context;
         }
     }
 }

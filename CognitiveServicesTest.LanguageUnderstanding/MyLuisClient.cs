@@ -38,7 +38,7 @@ namespace CognitiveServicesTest.LanguageUnderstanding
             var initialState = luisFlowConfiguration.States.First(x => x.IsInitialState);
             Dictionary<string, object> context = new Dictionary<string, object>();
             context.Add("outputStrings", outputStrings);
-            this.luisEngine = new LuisStateFlowEngine<FlowState>(appId, appKey, initialState, luisFlowConfiguration, new ClassInstantiatorBehavior<FlowState>(), context);
+            this.luisEngine = new LuisStateFlowEngine<FlowState>(appId, appKey, initialState, luisFlowConfiguration, new ClassInstantiatorBehavior(), context);
         }
 
         #endregion Constructors

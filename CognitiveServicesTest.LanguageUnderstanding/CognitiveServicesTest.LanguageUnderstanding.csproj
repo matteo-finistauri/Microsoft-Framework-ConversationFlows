@@ -57,6 +57,8 @@
     <Compile Include="Intent.cs" />
     <Compile Include="FlowState.cs" />
     <Compile Include="LuisFlowConfiguration.cs" />
+    <Compile Include="ProvidesAttribute.cs" />
+    <Compile Include="RequiresAttribute.cs" />
     <Compile Include="StateMachine\IStateBehavior.cs" />
     <Compile Include="LanguageUnderstandingRecognition.cs" />
     <Compile Include="LuisFlowStateTransition.cs" />

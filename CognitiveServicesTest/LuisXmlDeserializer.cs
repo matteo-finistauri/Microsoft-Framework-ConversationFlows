@@ -57,9 +57,6 @@ namespace CognitiveServicesTest.Serialization
         [XmlElement(ElementName = "condition")]
         public Condition Condition { get; set; }
 
-        [XmlElement(ElementName = "stateBehaviorClass")]
-        public string StateBehaviorClass { get; set; }
-
         [XmlAttribute(AttributeName = "currentState")]
         public string CurrentState { get; set; }
 
@@ -178,10 +175,6 @@ namespace CognitiveServicesTest.Serialization
                     {
                         op = ProcessIsEntityEqualsOperator(entityEquals);
                     }
-                }
-
-                if (!string.IsNullOrEmpty(luisFlowStateTransition.StateBehaviorClass))
-                {
                 }
 
                 var currentState = flowStates.First(x => x.Name == luisFlowStateTransition.CurrentState);
