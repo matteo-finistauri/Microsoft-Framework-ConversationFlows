@@ -3,7 +3,8 @@
 namespace CognitiveServices.LanguageUnderstanding.Attributes
 {
     /// <summary>
-    ///
+    /// Attribute to define the object keys required by the a state to execute its
+    /// behavior.
     /// </summary>
     /// <seealso cref="System.Attribute" />
     public class RequiresAttribute : Attribute

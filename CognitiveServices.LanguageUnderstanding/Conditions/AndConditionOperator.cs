@@ -4,7 +4,7 @@
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="CognitiveServices.LanguageUnderstanding.IConditionOperator{T}" />
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.Conditions.CombinationOperator{T}" />
     public class AndConditionOperator<T> : CombinationOperator<T>
     {
         /// <summary>

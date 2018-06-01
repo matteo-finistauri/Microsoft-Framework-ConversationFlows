@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices", "CognitiveServicesTest\CognitiveServices.csproj", "{888DD4E5-1AD8-4CFA-866E-1032B7EF16F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices", "CognitiveServices\CognitiveServices.csproj", "{888DD4E5-1AD8-4CFA-866E-1032B7EF16F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding", "CognitiveServicesTest.LanguageUnderstanding\CognitiveServices.LanguageUnderstanding.csproj", "{E439A4AA-CF18-452E-88DC-179609FFB423}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding", "CognitiveServices.LanguageUnderstanding\CognitiveServices.LanguageUnderstanding.csproj", "{E439A4AA-CF18-452E-88DC-179609FFB423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.DB", "CognitiveServicesTest.LanguageUnderstanding.DB\CognitiveServices.LanguageUnderstanding.DB.csproj", "{86130398-47D9-433D-86F9-3A466365CBC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.DB", "CognitiveServices.LanguageUnderstanding.DB\CognitiveServices.LanguageUnderstanding.DB.csproj", "{86130398-47D9-433D-86F9-3A466365CBC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.Xml", "CognitiveServicesTest.LanguageUnderstanding.Xml\CognitiveServices.LanguageUnderstanding.Xml.csproj", "{47D51DC5-5755-43AB-ACBE-26BDF3655FD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.Xml", "CognitiveServices.LanguageUnderstanding.Xml\CognitiveServices.LanguageUnderstanding.Xml.csproj", "{47D51DC5-5755-43AB-ACBE-26BDF3655FD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

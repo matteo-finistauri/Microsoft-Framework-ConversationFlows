@@ -3,7 +3,8 @@
 namespace CognitiveServices.LanguageUnderstanding.Attributes
 {
     /// <summary>
-    ///
+    /// Attribute to define the object keys provided by a state with the execution of
+    /// its behavior.
     /// </summary>
     /// <seealso cref="System.Attribute" />
     public class ProvidesAttribute : Attribute

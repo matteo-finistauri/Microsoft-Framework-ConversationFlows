@@ -8,7 +8,7 @@ namespace CognitiveServices.LanguageUnderstanding
     /// <summary>
     ///
     /// </summary>
-    /// <seealso cref="CognitiveServices.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServices.LanguageUnderstanding.FlowState}" />
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.StateMachine.IStateBehavior" />
     public abstract class BaseStateBehavior : IStateBehavior
     {
         /// <summary>
@@ -50,8 +50,7 @@ namespace CognitiveServices.LanguageUnderstanding
                 return null;
             }
 
-            var obj = this.context[key] as U;
-            if (obj == null)
+            if (!(this.context[key] is U obj))
             {
                 throw new InvalidCastException($"Cast of context object with key '{key}' to type {typeof(U).FullName} is incorrect.");
             }

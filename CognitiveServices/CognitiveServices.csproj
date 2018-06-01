@@ -59,15 +59,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding.DB\CognitiveServices.LanguageUnderstanding.DB.csproj">
+    <ProjectReference Include="..\CognitiveServices.LanguageUnderstanding.DB\CognitiveServices.LanguageUnderstanding.DB.csproj">
       <Project>{86130398-47d9-433d-86f9-3a466365cbc2}</Project>
       <Name>CognitiveServices.LanguageUnderstanding.DB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding.Xml\CognitiveServices.LanguageUnderstanding.Xml.csproj">
+    <ProjectReference Include="..\CognitiveServices.LanguageUnderstanding.Xml\CognitiveServices.LanguageUnderstanding.Xml.csproj">
       <Project>{47d51dc5-5755-43ab-acbe-26bdf3655fd6}</Project>
       <Name>CognitiveServices.LanguageUnderstanding.Xml</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CognitiveServicesTest.LanguageUnderstanding\CognitiveServices.LanguageUnderstanding.csproj">
+    <ProjectReference Include="..\CognitiveServices.LanguageUnderstanding\CognitiveServices.LanguageUnderstanding.csproj">
       <Project>{e439a4aa-cf18-452e-88dc-179609ffb423}</Project>
       <Name>CognitiveServices.LanguageUnderstanding</Name>
     </ProjectReference>

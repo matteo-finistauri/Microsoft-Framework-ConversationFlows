@@ -5,14 +5,14 @@ using System.Linq;
 namespace CognitiveServices.LanguageUnderstanding.Attributes
 {
     /// <summary>
-    ///
+    /// Provides some functionalities to work with the Provides and Requires
+    /// attributes.
     /// </summary>
     public static class StateAttributesHelper
     {
-        #region Attributes management
-
         /// <summary>
-        /// Verifies the required attributes.
+        /// Verifies that the required objects keys defined in the state are actually
+        /// provided (present in the keys array).
         /// </summary>
         /// <param name="state">The state.</param>
         /// <param name="context">The context.</param>
@@ -35,7 +35,8 @@ namespace CognitiveServices.LanguageUnderstanding.Attributes
         }
 
         /// <summary>
-        /// Verifies the provided attributes.
+        /// Verifies that the provided objects keys defined from the state are actually
+        /// provided with its behavior execution and put in the keys array.
         /// </summary>
         /// <param name="state">The state.</param>
         /// <param name="context">The context.</param>
@@ -58,7 +59,8 @@ namespace CognitiveServices.LanguageUnderstanding.Attributes
         }
 
         /// <summary>
-        /// Gets the required objects.
+        /// Gets the required objects keys defined through the Requires attribute
+        /// in the specified type.
         /// </summary>
         /// <param name="behaviorType">Type of the behavior.</param>
         /// <returns></returns>
@@ -85,7 +87,8 @@ namespace CognitiveServices.LanguageUnderstanding.Attributes
         }
 
         /// <summary>
-        /// Gets the provided objects keys.
+        /// Gets the provided objects keys defined through the Provides attribute
+        /// in the specified type.
         /// </summary>
         /// <param name="behaviorType">Type of the behavior.</param>
         /// <returns></returns>
@@ -110,7 +113,5 @@ namespace CognitiveServices.LanguageUnderstanding.Attributes
 
             return requiredObject;
         }
-
-        #endregion Attributes management
     }
 }
