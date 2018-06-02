@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using CognitiveServices.LanguageUnderstanding.Bot.Dialogs;
 using CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
@@ -54,7 +55,8 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
                     {
                         if (newMember.Id != message.Recipient.Id)
                         {
-                            var client = StateProvider.Instance;
+                            StateProvider sp = new StateProvider();
+                            var client = sp.Instance;
                             client.SetContext("message", message);
                             client.Start();
                         }

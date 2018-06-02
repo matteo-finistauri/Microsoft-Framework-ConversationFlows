@@ -1,4 +1,5 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using CognitiveServices.LanguageUnderstanding.Bot.Dialogs;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs
 {
     [Serializable]
-    public class RootDialog : LuisCommunicationDialog<object>
+    public class RootDialog : LuisCommunicationDialog<object, StateProvider>
     {
         public override Task StartAsync(IDialogContext context)
         {

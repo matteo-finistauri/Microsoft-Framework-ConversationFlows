@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs
+namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
 {
     /// <summary>
     ///
@@ -13,7 +13,8 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="Microsoft.Bot.Builder.Dialogs.IDialog{T}" />
     [Serializable]
-    public abstract class LuisCommunicationDialog<T> : IDialog<T>
+    public abstract class LuisCommunicationDialog<T, TLuisCommunicationManagerProvider> : IDialog<T>
+        where TLuisCommunicationManagerProvider : ILuisCommunicationManagerProvider, new()
     {
         /// <summary>
         /// The state
@@ -46,7 +47,8 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs
             {
                 if (this.client == null)
                 {
-                    this.client = StateProvider.Instance;
+                    var provider = new TLuisCommunicationManagerProvider();
+                    this.client = provider.Instance;
                 }
 
                 return client;

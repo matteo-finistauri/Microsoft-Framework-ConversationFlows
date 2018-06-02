@@ -6,12 +6,18 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs
+namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
 {
-    public class StateProvider
+    public class StateProvider : ILuisCommunicationManagerProvider
     {
+        /// <summary>
+        /// The lock object
+        /// </summary>
         private static object lockObject = new object();
 
+        /// <summary>
+        /// The instance
+        /// </summary>
         private static LuisCommunicationManager instance;
 
         /// <summary>
@@ -29,7 +35,7 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs
             { "TwoMeters", "Cool! Consider it built!" }
         };
 
-        public static LuisCommunicationManager Instance
+        public LuisCommunicationManager Instance
         {
             get
             {
