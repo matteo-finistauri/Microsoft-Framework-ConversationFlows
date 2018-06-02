@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<luisConfiguration>
+  <luisFlowStates>
+    <luisFlowState name="InitialState" isInitialState="true">
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp.ConsoleWriterBehavior, CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp</stateBehaviorClass>
+    </luisFlowState>
+    <luisFlowState name="BuildingShelf">
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp.ConsoleWriterBehavior, CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp</stateBehaviorClass>
+    </luisFlowState>
+    <luisFlowState name="TwoMeters">
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp.SendToBackendStateBehavior, CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp</stateBehaviorClass>
+    </luisFlowState>
+    <luisFlowState name="BuildingArmchair">
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp.ConsoleWriterBehavior, CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp</stateBehaviorClass>
+    </luisFlowState>
+  </luisFlowStates>
+
+  <luisFlowStateTransitions>
+    <luisFlowStateTransition currentState="InitialState" nextState="BuildingShelf" intent="Build.Furniture" isFinalState="false">
+      <condition>
+        <isEntityEquals name="FurnitureType" value="shelf" />
+      </condition>
+    </luisFlowStateTransition>
+
+    <luisFlowStateTransition currentState="BuildingShelf" nextState="TwoMeters" intent="Shelf.Size" isFinalState="false">
+      <condition>
+        <orOperator>
+          <isEntityEquals name="builtin.number" value="two" />
+          <isEntityEquals name="builtin.number" value="2" />
+        </orOperator>
+      </condition>
+    </luisFlowStateTransition>
+
+    <luisFlowStateTransition currentState="InitialState" nextState="BuildingArmchair" intent="Build.Furniture" isFinalState="false">
+      <condition>
+        <isEntityEquals name="FurnitureType" value="armchair" />
+      </condition>
+    </luisFlowStateTransition>
+  </luisFlowStateTransitions>
+</luisConfiguration>

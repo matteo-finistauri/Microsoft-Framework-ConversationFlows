@@ -35,30 +35,6 @@ namespace CognitiveServices.LanguageUnderstanding
         protected FlowState State { get; }
 
         /// <summary>
-        /// Gets the context object.
-        /// </summary>
-        /// <typeparam name="U"></typeparam>
-        /// <param name="key">The key.</param>
-        /// <returns></returns>
-        /// <exception cref="InvalidCastException">Cast to type " + typeof(U).FullName + " is incorrect.</exception>
-        protected U GetContextObject<U>(string key)
-            where U : class
-        {
-            StateAttributesHelper.VerifyRequiredAttributes(this.State, key);
-            if (this.context[key] == null)
-            {
-                return null;
-            }
-
-            if (!(this.context[key] is U obj))
-            {
-                throw new InvalidCastException($"Cast of context object with key '{key}' to type {typeof(U).FullName} is incorrect.");
-            }
-
-            return obj;
-        }
-
-        /// <summary>
         /// Sets the context object.
         /// </summary>
         /// <typeparam name="U"></typeparam>
@@ -76,6 +52,30 @@ namespace CognitiveServices.LanguageUnderstanding
             {
                 this.context.Add(key, obj);
             }
+        }
+
+        /// <summary>
+        /// Gets the context object.
+        /// </summary>
+        /// <typeparam name="U"></typeparam>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
+        /// <exception cref="InvalidCastException">Cast to type " + typeof(U).FullName + " is incorrect.</exception>
+        protected U GetContextObject<U>(string key)
+            where U : class
+        {
+            //StateAttributesHelper.VerifyRequiredAttributes(this.State, key);
+            if (this.context[key] == null)
+            {
+                return null;
+            }
+
+            if (!(this.context[key] is U obj))
+            {
+                throw new InvalidCastException($"Cast of context object with key '{key}' to type {typeof(U).FullName} is incorrect.");
+            }
+
+            return obj;
         }
 
         /// <summary>

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace CognitiveServices.LanguageUnderstanding.Xml
 {
+    [Serializable]
     [XmlRoot(ElementName = "luisFlowState")]
     public class LuisFlowState
     {
@@ -16,6 +18,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         public bool IsInitialState { get; set; }
     }
 
+    [Serializable]
     [XmlRoot(ElementName = "luisFlowStates")]
     public class LuisFlowStates
     {
@@ -23,6 +26,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         public List<LuisFlowState> List { get; set; }
     }
 
+    [Serializable]
     [XmlRoot(ElementName = "isEntityEquals")]
     public class IsEntityEquals
     {
@@ -33,6 +37,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         public string Value { get; set; }
     }
 
+    [Serializable]
     [XmlRoot(ElementName = "condition")]
     public class Condition
     {
@@ -46,6 +51,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         public AndOperator AndOperator { get; set; }
     }
 
+    [Serializable]
     [XmlRoot(ElementName = "luisFlowStateTransition")]
     public class LuisFlowStateTransition
     {
@@ -65,6 +71,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         public bool IsFinalState { get; set; }
     }
 
+    [Serializable]
     public class CombinatorialOperator
     {
         [XmlElement(ElementName = "isEntityEquals")]
@@ -77,6 +84,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         public List<AndOperator> AndOperators { get; set; }
     }
 
+    [Serializable]
     [XmlRoot(ElementName = "orOperator")]
     public class OrOperator : CombinatorialOperator
     {
@@ -94,6 +102,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         public List<LuisFlowStateTransition> List { get; set; }
     }
 
+    [Serializable]
     [XmlRoot(ElementName = "luisConfiguration")]
     public class LuisConfiguration
     {

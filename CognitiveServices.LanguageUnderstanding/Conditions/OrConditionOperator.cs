@@ -1,4 +1,6 @@
-﻿namespace CognitiveServices.LanguageUnderstanding.Conditions
+﻿using System;
+
+namespace CognitiveServices.LanguageUnderstanding.Conditions
 {
     /// <summary>
     ///

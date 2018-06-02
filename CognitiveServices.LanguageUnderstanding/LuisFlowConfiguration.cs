@@ -1,4 +1,5 @@
 ﻿using CognitiveServices.LanguageUnderstanding.StateMachine;
+using System;
 using System.Collections.Generic;
 
 namespace CognitiveServices.LanguageUnderstanding
@@ -15,7 +16,7 @@ namespace CognitiveServices.LanguageUnderstanding
         /// <value>
         /// The states.
         /// </value>
-        public List<FlowState> States { get; set; }
+        public List<T> States { get; set; }
 
         /// <summary>
         /// Gets or sets the transitions.

@@ -1,5 +1,12 @@
-﻿namespace CognitiveServices.LanguageUnderstanding.Conditions
+﻿using System;
+
+namespace CognitiveServices.LanguageUnderstanding.Conditions
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="CognitiveServices.LanguageUnderstanding.Conditions.IConditionOperator{T}" />
     public abstract class CombinationOperator<T> : IConditionOperator<T>
     {
         /// <summary>

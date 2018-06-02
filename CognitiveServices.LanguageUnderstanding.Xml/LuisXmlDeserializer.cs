@@ -9,6 +9,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
     /// <summary>
     ///
     /// </summary>
+    [Serializable]
     public static class StatesConverter
     {
         /// <summary>
@@ -47,11 +48,13 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
         /// </exception>
         private static List<FlowState> GetStates(LuisConfiguration configuration)
         {
+            int i = 1;
             var states = new List<FlowState>();
             foreach (var item in configuration.LuisFlowStates.List)
             {
                 var state = new FlowState
                 {
+                    Id = i++,
                     Name = item.Name,
                     IsInitialState = item.IsInitialState
                 };

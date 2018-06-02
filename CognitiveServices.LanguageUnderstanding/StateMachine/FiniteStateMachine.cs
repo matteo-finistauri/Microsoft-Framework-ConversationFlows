@@ -11,6 +11,7 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
     /// <typeparam name="U">The action type.</typeparam>
     /// <typeparam name="Y">The condition parameter type.</typeparam>
     public class FiniteStateMachine<T, U, Y>
+        where T : IState
     {
         #region Constructors
 
@@ -44,7 +45,7 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
         /// <value>
         /// The state of the current.
         /// </value>
-        public T CurrentState { get; private set; }
+        public T CurrentState { get; internal set; }
 
         /// <summary>
         /// Gets the initial state.
@@ -61,13 +62,13 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
         /// <summary>
         /// Moves the state of to next.
         /// </summary>
+        /// <param name="id">The identifier.</param>
         /// <param name="action">The action.</param>
         /// <param name="conditionObject">The condition object.</param>
         /// <returns></returns>
-        public T MoveToNextState(U action, Y conditionObject)
+        public void MoveToNextState(U action, Y conditionObject)
         {
-            this.CurrentState = GetNext(action, conditionObject);
-            return this.CurrentState;
+            this.CurrentState = GetNext(this.CurrentState, action, conditionObject);
         }
 
         /// <summary>
@@ -76,23 +77,59 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
         /// <param name="action">The action.</param>
         /// <param name="conditionObject">The condition object.</param>
         /// <returns></returns>
-        private T GetNext(U action, Y conditionObject)
+        private T GetNext(T currentState, U action, Y conditionObject)
         {
             var validTransitions = this.Transitions.Where(
-                x => x.CurrentState.Equals(this.CurrentState) &&
+                x => x.CurrentState.Equals(currentState) &&
                 x.Action.Equals(action) &&
-                (x.Condition == null || x.Condition(this.CurrentState, action, conditionObject))
+                (x.Condition == null || x.Condition(currentState, action, conditionObject))
                 ).Select(x => x.NextState);
             if (validTransitions.Count() == 0)
             {
-                throw new Exception("No transitions found for " + this.CurrentState + " --> " + action);
+                throw new Exception("No transitions found for " + currentState + " --> " + action);
             }
             else if (validTransitions.Count() > 1)
             {
-                throw new Exception("The transition for " + this.CurrentState + " --> " + action + " is not unique");
+                throw new Exception("The transition for " + currentState + " --> " + action + " is not unique");
             }
 
             return validTransitions.First();
+        }
+
+        /// <summary>
+        /// Gets the state by identifier.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public T GetStateById(int value)
+        {
+            return this.GetStateById(value, this.InitialState);
+        }
+
+        /// <summary>
+        /// Gets the state by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="state">The state.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Value not found.</exception>
+        private T GetStateById(int id, MachineState<T, U, Y> state)
+        {
+            if (state.State.Id == id)
+            {
+                return state.State;
+            }
+
+            foreach (var link in state.Links)
+            {
+                var subNode = GetStateById(id, link.DestinationState);
+                if (subNode != null)
+                {
+                    return subNode;
+                }
+            }
+
+            throw new Exception("State Id not found.");
         }
 
         /// <summary>

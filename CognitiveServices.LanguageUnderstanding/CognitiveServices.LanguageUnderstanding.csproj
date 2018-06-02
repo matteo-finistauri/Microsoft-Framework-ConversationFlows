@@ -52,10 +52,11 @@
     <Compile Include="FlowStateBehaviorExecutor.cs" />
     <Compile Include="Conditions\CombinationOperator.cs" />
     <Compile Include="Conditions\IConditionOperator.cs" />
-    <Compile Include="Conditions\EntityBinding.cs" />
+    <Compile Include="Conditions\IsEntityEqualsCondition.cs" />
     <Compile Include="Conditions\AndConditionOperator.cs" />
     <Compile Include="IBehaviorExecutor.cs" />
     <Compile Include="FlowState.cs" />
+    <Compile Include="IState.cs" />
     <Compile Include="LuisFlowConfiguration.cs" />
     <Compile Include="Attributes\ProvidesAttribute.cs" />
     <Compile Include="Attributes\RequiresAttribute.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateMachine\FiniteStateMachine.cs" />
     <Compile Include="StateMachine\MachineState.cs" />
-    <Compile Include="StateMachine\MachineStateDestination.cs" />
+    <Compile Include="StateMachine\MachineStateLink.cs" />
     <Compile Include="StateMachine\StateTransition.cs" />
   </ItemGroup>
   <ItemGroup>

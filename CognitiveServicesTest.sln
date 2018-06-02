@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices", "CognitiveServices\CognitiveServices.csproj", "{888DD4E5-1AD8-4CFA-866E-1032B7EF16F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp", "CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp\CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp.csproj", "{888DD4E5-1AD8-4CFA-866E-1032B7EF16F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding", "CognitiveServices.LanguageUnderstanding\CognitiveServices.LanguageUnderstanding.csproj", "{E439A4AA-CF18-452E-88DC-179609FFB423}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.DB", "CognitiveServices.LanguageUnderstanding.DB\CognitiveServices.LanguageUnderstanding.DB.csproj", "{86130398-47D9-433D-86F9-3A466365CBC2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.Xml", "CognitiveServices.LanguageUnderstanding.Xml\CognitiveServices.LanguageUnderstanding.Xml.csproj", "{47D51DC5-5755-43AB-ACBE-26BDF3655FD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.Samples.Bot", "CognitiveServices.LanguageUnderstanding.Samples.Bot\CognitiveServices.LanguageUnderstanding.Samples.Bot.csproj", "{EFBBA7C9-61AF-407E-B1C0-6D605FC8EEBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{0EDF9399-855C-4A2F-9368-8FF289365E64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,17 @@ Global
 		{47D51DC5-5755-43AB-ACBE-26BDF3655FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47D51DC5-5755-43AB-ACBE-26BDF3655FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47D51DC5-5755-43AB-ACBE-26BDF3655FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFBBA7C9-61AF-407E-B1C0-6D605FC8EEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFBBA7C9-61AF-407E-B1C0-6D605FC8EEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFBBA7C9-61AF-407E-B1C0-6D605FC8EEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFBBA7C9-61AF-407E-B1C0-6D605FC8EEBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{888DD4E5-1AD8-4CFA-866E-1032B7EF16F8} = {0EDF9399-855C-4A2F-9368-8FF289365E64}
+		{EFBBA7C9-61AF-407E-B1C0-6D605FC8EEBD} = {0EDF9399-855C-4A2F-9368-8FF289365E64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14B0A3B1-8C81-4EA9-A72A-E607F4D89E41}

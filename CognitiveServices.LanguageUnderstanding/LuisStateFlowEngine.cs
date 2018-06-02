@@ -11,13 +11,9 @@ namespace CognitiveServices.LanguageUnderstanding
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class LuisStateFlowEngine<T>
+        where T : IState
     {
         #region Fields
-
-        /// <summary>
-        /// The luis client
-        /// </summary>
-        private readonly LuisClient luisClient;
 
         /// <summary>
         /// The state action
@@ -33,6 +29,16 @@ namespace CognitiveServices.LanguageUnderstanding
         /// The started
         /// </summary>
         private bool started;
+
+        /// <summary>
+        /// The application identifier
+        /// </summary>
+        private string appId;
+
+        /// <summary>
+        /// The application key
+        /// </summary>
+        private string appKey;
 
         #endregion Fields
 
@@ -52,13 +58,21 @@ namespace CognitiveServices.LanguageUnderstanding
             IBehaviorExecutor<T> behaviorExecutor,
             Dictionary<string, object> context)
         {
-            this.luisClient = new LuisClient(appId, appKey);
+            this.appId = appId;
+            this.appKey = appKey;
             this.StateMachine = new FiniteStateMachine<T, string, LanguageUnderstandingResult>(initialState, luisConfiguration.Transitions);
             this.stateBehavior = behaviorExecutor;
             this.context = context;
         }
 
+        public LuisStateFlowEngine(FiniteStateMachine<T, string, LanguageUnderstandingResult> stateMachine)
+        {
+            this.StateMachine = stateMachine;
+        }
+
         #endregion Constructors
+
+        #region Properties
 
         /// <summary>
         /// Gets the state machine.
@@ -68,18 +82,53 @@ namespace CognitiveServices.LanguageUnderstanding
         /// </value>
         public FiniteStateMachine<T, string, LanguageUnderstandingResult> StateMachine { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the state.
+        /// </summary>
+        /// <value>
+        /// The state.
+        /// </value>
+        public int State
+        {
+            get
+            {
+                return this.StateMachine.CurrentState.Id;
+            }
+
+            set
+            {
+                this.StateMachine.CurrentState = this.StateMachine.GetStateById(value);
+            }
+        }
+
+        #endregion Properties
+
         #region Methods
+
+        /// <summary>
+        /// Sets the context.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        public void SetContext(string key, object value)
+        {
+            if (this.context.ContainsKey(key))
+            {
+                this.context[key] = value;
+            }
+            else
+            {
+                this.context.Add(key, value);
+            }
+        }
 
         /// <summary>
         /// Starts this instance.
         /// </summary>
         public void Start()
         {
-            if (!this.started)
-            {
-                this.stateBehavior.ExecuteBehavior(this.StateMachine.CurrentState, this.context);
-                this.started = true;
-            }
+            this.StateMachine.CurrentState = this.StateMachine.InitialState.State;
+            this.stateBehavior.ExecuteBehavior(this.StateMachine.CurrentState, this.context);
         }
 
         /// <summary>
@@ -88,14 +137,9 @@ namespace CognitiveServices.LanguageUnderstanding
         /// <param name="message">The message.</param>
         public void ElaborateMessage(string message)
         {
-            if (!started)
-            {
-                throw new Exception("You must start the state flow engine before elaborating any message.");
-            }
-
             var recognizedData = this.RecognizeText(message);
-            var nextState = this.StateMachine.MoveToNextState(recognizedData.EntityName, recognizedData);
-            this.stateBehavior?.ExecuteBehavior(nextState, context);
+            this.StateMachine.MoveToNextState(recognizedData.EntityName, recognizedData);
+            this.stateBehavior?.ExecuteBehavior(this.StateMachine.CurrentState, context);
         }
 
         /// <summary>
@@ -106,7 +150,8 @@ namespace CognitiveServices.LanguageUnderstanding
         /// <returns></returns>
         private LanguageUnderstandingResult RecognizeText(string text)
         {
-            var result = this.luisClient.Predict(text).Result;
+            var luisClient = new LuisClient(appId, appKey);
+            var result = luisClient.Predict(text).Result;
             var intent = result.TopScoringIntent;
             Dictionary<string, string> entities = new Dictionary<string, string>();
             foreach (var entity in result.Entities)

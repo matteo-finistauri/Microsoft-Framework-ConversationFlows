@@ -1,5 +1,6 @@
 ﻿using CognitiveServices.LanguageUnderstanding.Attributes;
 using CognitiveServices.LanguageUnderstanding.StateMachine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,12 +30,61 @@ namespace CognitiveServices.LanguageUnderstanding
             var initialState = luisFlowConfiguration.States.Single(x => x.IsInitialState);
             this.luisEngine = new LuisStateFlowEngine<FlowState>(appId, appKey, initialState, luisFlowConfiguration, new FlowStateBehaviorExecutor(), context);
             this.PerformStaticVerification(context.Keys);
+        }
+
+        /// <summary>
+        /// Starts this instance.
+        /// </summary>
+        public void Start()
+        {
             this.luisEngine.Start();
         }
 
         #endregion Constructors
 
+        /// <summary>
+        /// Gets the state machine.
+        /// </summary>
+        /// <value>
+        /// The state machine.
+        /// </value>
+        public FiniteStateMachine<FlowState, string, LanguageUnderstandingResult> StateMachine
+        {
+            get
+            {
+                return this.luisEngine.StateMachine;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the state.
+        /// </summary>
+        /// <value>
+        /// The state.
+        /// </value>
+        public int State
+        {
+            get
+            {
+                return this.luisEngine.State;
+            }
+            set
+            {
+                this.luisEngine.State = value;
+            }
+        }
+
         #region Methods
+
+        /// <summary>
+        /// Sets the context.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        public void SetContext(string key, object value)
+        {
+            this.luisEngine.SetContext(key, value);
+        }
 
         /// <summary>
         /// Performs the static verification.

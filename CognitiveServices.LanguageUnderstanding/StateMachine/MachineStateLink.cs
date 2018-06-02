@@ -23,10 +23,28 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
             this.Condition = condition;
         }
 
+        /// <summary>
+        /// Gets the state of the destination.
+        /// </summary>
+        /// <value>
+        /// The state of the destination.
+        /// </value>
         public MachineState<T, U, Y> DestinationState { get; }
 
+        /// <summary>
+        /// Gets the action.
+        /// </summary>
+        /// <value>
+        /// The action.
+        /// </value>
         public U Action { get; }
 
+        /// <summary>
+        /// Gets the condition.
+        /// </summary>
+        /// <value>
+        /// The condition.
+        /// </value>
         public Func<T, U, Y, bool> Condition { get; }
     }
 }

@@ -2,16 +2,16 @@
 <luisConfiguration>
   <luisFlowStates>
     <luisFlowState name="InitialState" isInitialState="true">
-      <stateBehaviorClass>CognitiveServices.ConsoleWriterBehavior, CognitiveServices</stateBehaviorClass>
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.Bot.ConversationSendBehavior, Bot Application</stateBehaviorClass>
     </luisFlowState>
     <luisFlowState name="BuildingShelf">
-      <stateBehaviorClass>CognitiveServices.ConsoleWriterBehavior, CognitiveServices</stateBehaviorClass>
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application</stateBehaviorClass>
     </luisFlowState>
     <luisFlowState name="TwoMeters">
-      <stateBehaviorClass>CognitiveServices.SendToBackendStateBehavior, CognitiveServices</stateBehaviorClass>
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application</stateBehaviorClass>
     </luisFlowState>
     <luisFlowState name="BuildingArmchair">
-      <stateBehaviorClass>CognitiveServices.ConsoleWriterBehavior, CognitiveServices</stateBehaviorClass>
+      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application</stateBehaviorClass>
     </luisFlowState>
   </luisFlowStates>
 

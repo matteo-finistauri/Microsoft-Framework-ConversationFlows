@@ -1,11 +1,14 @@
 ﻿using CognitiveServices.LanguageUnderstanding;
+using CognitiveServices.LanguageUnderstanding.Conditions;
+using CognitiveServices.LanguageUnderstanding.StateMachine;
 using CognitiveServices.LanguageUnderstanding.Xml;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
-namespace CognitiveServices
+namespace CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp
 {
     internal class Program
     {
@@ -41,6 +44,11 @@ namespace CognitiveServices
             //ApplicationContext ctx = new ApplicationContext();
             //ctx.Database.Initialize(false);
 
+            var context = new Dictionary<string, object>
+            {
+                { "outputStrings", outputStrings }
+            };
+
             LuisConfiguration configuration = null;
             XmlSerializer serializer = new XmlSerializer(typeof(LuisConfiguration));
             using (TextReader reader = new StreamReader(FILENAME))
@@ -48,15 +56,12 @@ namespace CognitiveServices
                 configuration = (LuisConfiguration)serializer.Deserialize(reader);
             }
 
-            var context = new Dictionary<string, object>
-            {
-                { "outputStrings", outputStrings }
-            };
-
             var luisConfiguration = StatesConverter.Convert(configuration);
             LuisCommunicationManager client = new LuisCommunicationManager(
                 "a9777fd2-0c56-4a76-b3b4-740b387c05d5", "0c13af8b1228447bb2ce26e7be709940",
                 luisConfiguration, context);
+            client.Start();
+
             foreach (var message in userInputs)
             {
                 Console.WriteLine("User: " + message);
@@ -65,13 +70,6 @@ namespace CognitiveServices
 
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
-        }
-
-        /// <summary>
-        /// Executes this instance.
-        /// </summary>
-        private static void Execute()
-        {
         }
     }
 }

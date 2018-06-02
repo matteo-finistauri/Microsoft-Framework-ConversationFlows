@@ -3,7 +3,7 @@ using CognitiveServices.LanguageUnderstanding.Attributes;
 using System;
 using System.Collections.Generic;
 
-namespace CognitiveServices
+namespace CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp
 {
     /// <summary>
     ///
