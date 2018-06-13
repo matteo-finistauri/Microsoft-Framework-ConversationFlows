@@ -8,14 +8,20 @@ using System.Web;
 namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
 {
     /// <summary>
-    ///
+    /// This is a bot dialog to use the Luis Communcation Manager.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <seealso cref="Microsoft.Bot.Builder.Dialogs.IDialog{T}" />
     [Serializable]
-    public abstract class LuisCommunicationDialog<T, TLuisCommunicationManagerProvider> : IDialog<T>
-        where TLuisCommunicationManagerProvider : ILuisCommunicationManagerProvider, new()
+    public abstract class LuisCommunicationDialog<T> : IDialog<T>
     {
+        #region Fields
+
+        /// <summary>
+        /// The provider
+        /// </summary>
+        private readonly ILuisCommunicationManagerProvider provider;
+
         /// <summary>
         /// The state
         /// </summary>
@@ -25,15 +31,25 @@ namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
         /// The client
         /// </summary>
         [NonSerialized]
-        private LuisCommunicationManager client;
+        private ILuisCommunicationManager client;
+
+        #endregion Fields
+
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LuisCommunicationDialog{T}"/> class.
         /// </summary>
-        public LuisCommunicationDialog()
+        public LuisCommunicationDialog(ILuisCommunicationManagerProvider provider)
         {
+            this.provider = provider;
+            // Needed to start from the initial state.
             this.state = this.Client.StateMachine.InitialState.State.Id;
         }
+
+        #endregion Constructors
+
+        #region Properties
 
         /// <summary>
         /// Gets the client.
@@ -41,19 +57,22 @@ namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
         /// <value>
         /// The client.
         /// </value>
-        private LuisCommunicationManager Client
+        private ILuisCommunicationManager Client
         {
             get
             {
                 if (this.client == null)
                 {
-                    var provider = new TLuisCommunicationManagerProvider();
                     this.client = provider.Instance;
                 }
 
                 return client;
             }
         }
+
+        #endregion Properties
+
+        #region Methods
 
         /// <summary>
         /// Elaborates the message.
@@ -67,7 +86,7 @@ namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
         }
 
         /// <summary>
-        /// Sets the context.
+        /// Sets a value in the context.
         /// </summary>
         /// <typeparam name="Y"></typeparam>
         /// <param name="key">The key.</param>
@@ -85,5 +104,7 @@ namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
         /// A task that represents the dialog start.
         /// </returns>
         public abstract Task StartAsync(IDialogContext context);
+
+        #endregion Methods
     }
 }

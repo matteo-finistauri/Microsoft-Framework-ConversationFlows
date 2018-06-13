@@ -1,4 +1,5 @@
-﻿using CognitiveServices.LanguageUnderstanding.Xml;
+﻿using CognitiveServices.LanguageUnderstanding.Samples.Shared;
+using CognitiveServices.LanguageUnderstanding.Xml;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,15 +27,11 @@ namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
         private const string FILENAME = @"C:\Users\matteo.finistauri\source\repos\CognitiveServicesTest\CognitiveServices.LanguageUnderstanding.Samples.Bot\Example.xml";
 
         /// <summary>
-        /// The output strings
+        /// Gets the instance.
         /// </summary>
-        private static readonly Dictionary<string, string> outputStrings = new Dictionary<string, string>()
-        {
-            { "InitialState", "Hello! This is the bot. What can I do for you?" },
-            { "BuildingShelf", "Good! How long is your shelf?" },
-            { "TwoMeters", "Cool! Consider it built!" }
-        };
-
+        /// <value>
+        /// The instance.
+        /// </value>
         public LuisCommunicationManager Instance
         {
             get
@@ -51,8 +48,8 @@ namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
                             var luisConfiguration = StatesConverter.Convert(configuration);
                             var context = new Dictionary<string, object>()
                             {
-                                { "outputStrings", outputStrings },
-                            {"message", null },
+                                { "outputStrings", StaticData.OutputStrings },
+                                {"message", null },
                                 {"context", null }
                             };
                             instance = new LuisCommunicationManager(

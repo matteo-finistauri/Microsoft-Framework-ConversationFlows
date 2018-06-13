@@ -19,9 +19,6 @@
     <luisFlowState name="BuildingSomethingElse">
       <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application</stateBehaviorClass>
     </luisFlowState>
-    <luisFlowState name="Completed">
-      <stateBehaviorClass>CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application</stateBehaviorClass>
-    </luisFlowState>
   </luisFlowStates>
 
   <luisFlowStateTransitions>
@@ -40,7 +37,7 @@
     <luisFlowStateTransition currentState="InitialState" nextState="BuildingSomethingElse" intent="Build.Furniture" isFinalState="true">
     </luisFlowStateTransition>
 
-    <luisFlowStateTransition currentState="BuildingShelf" nextState="TwoMeters" intent="Shelf.Size">
+    <luisFlowStateTransition currentState="BuildingShelf" nextState="TwoMeters" intent="Shelf.Size" isFinalState="true">
       <condition>
         <orOperator>
           <isEntityEquals name="builtin.number" value="two" />
@@ -48,8 +45,6 @@
         </orOperator>
       </condition>
     </luisFlowStateTransition>
-
-    <luisFlowStateTransition currentState="TwoMeters" nextState="Completed" intent="Acknowledgement" isFinalState="true" />
 
     <!-- Error handling -->
 

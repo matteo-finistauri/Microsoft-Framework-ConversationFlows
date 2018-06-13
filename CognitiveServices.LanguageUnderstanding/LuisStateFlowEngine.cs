@@ -26,19 +26,14 @@ namespace CognitiveServices.LanguageUnderstanding
         private readonly Dictionary<string, object> context;
 
         /// <summary>
-        /// The started
-        /// </summary>
-        private bool started;
-
-        /// <summary>
         /// The application identifier
         /// </summary>
-        private string appId;
+        private readonly string appId;
 
         /// <summary>
         /// The application key
         /// </summary>
-        private string appKey;
+        private readonly string appKey;
 
         #endregion Fields
 
@@ -51,7 +46,7 @@ namespace CognitiveServices.LanguageUnderstanding
         /// <param name="appKey">The application key.</param>
         /// <param name="initialState">The initial state.</param>
         /// <param name="luisConfiguration">The luis configuration.</param>
-        /// <param name="stateBehavior">The state behavior.</param>
+        /// <param name="behaviorExecutor">The behavior executor.</param>
         /// <param name="context">The context.</param>
         public LuisStateFlowEngine(string appId, string appKey, T initialState,
             LuisFlowConfiguration<T> luisConfiguration,
@@ -63,11 +58,6 @@ namespace CognitiveServices.LanguageUnderstanding
             this.StateMachine = new FiniteStateMachine<T, string, LanguageUnderstandingResult>(initialState, luisConfiguration.Transitions);
             this.stateBehavior = behaviorExecutor;
             this.context = context;
-        }
-
-        public LuisStateFlowEngine(FiniteStateMachine<T, string, LanguageUnderstandingResult> stateMachine)
-        {
-            this.StateMachine = stateMachine;
         }
 
         #endregion Constructors

@@ -15,6 +15,9 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot
         {
         }
 
+        /// <summary>
+        /// Executes the behavior.
+        /// </summary>
         public override void ExecuteBehavior()
         {
             var dialogContext = this.GetContextObject<IDialogContext>("context");

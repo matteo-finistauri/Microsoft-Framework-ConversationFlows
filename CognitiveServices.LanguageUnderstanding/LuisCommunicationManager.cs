@@ -9,7 +9,7 @@ namespace CognitiveServices.LanguageUnderstanding
     /// <summary>
     ///
     /// </summary>
-    public class LuisCommunicationManager
+    public class LuisCommunicationManager : ILuisCommunicationManager
     {
         #region Fields
 
@@ -92,7 +92,7 @@ namespace CognitiveServices.LanguageUnderstanding
         /// <param name="initialKeys">The initial keys.</param>
         public void PerformStaticVerification(IEnumerable<string> initialKeys)
         {
-            this.VerifyRequiredConsistency(this.luisEngine.StateMachine.InitialState, initialKeys);
+            this.VerifyRequiredConsistency(this.luisEngine.StateMachine.InitialState, initialKeys, new List<MachineState<FlowState, string, LanguageUnderstandingResult>>());
         }
 
         /// <summary>
@@ -100,14 +100,18 @@ namespace CognitiveServices.LanguageUnderstanding
         /// </summary>
         /// <param name="state">The state.</param>
         /// <param name="existingKeys">The existing keys.</param>
-        private void VerifyRequiredConsistency(MachineState<FlowState, string, LanguageUnderstandingResult> state, IEnumerable<string> existingKeys)
+        private void VerifyRequiredConsistency(MachineState<FlowState, string, LanguageUnderstandingResult> state, IEnumerable<string> existingKeys, List<MachineState<FlowState, string, LanguageUnderstandingResult>> statesAlreadySeen)
         {
             StateAttributesHelper.VerifyRequiredAttributes(state.State, existingKeys.ToArray());
+            statesAlreadySeen.Add(state);
             var providedObjects = StateAttributesHelper.GetProvidedObjectsKeys(state.State.BehaviorType);
             var newExistingKeys = new List<string>(existingKeys.ToArray());
             foreach (var destination in state.Links)
             {
-                VerifyRequiredConsistency(destination.DestinationState, newExistingKeys);
+                if (!statesAlreadySeen.Contains(destination.DestinationState))
+                {
+                    VerifyRequiredConsistency(destination.DestinationState, newExistingKeys, statesAlreadySeen);
+                }
             }
         }
 

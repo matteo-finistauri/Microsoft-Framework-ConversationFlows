@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{0EDF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.Bot", "CognitiveServices.LanguageUnderstanding.Bot\CognitiveServices.LanguageUnderstanding.Bot.csproj", "{1DC7ECC6-B6E1-429B-A40D-18A329BB9882}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServices.LanguageUnderstanding.Samples.Shared", "CognitiveServices.LanguageUnderstanding.Samples.Shared\CognitiveServices.LanguageUnderstanding.Samples.Shared.csproj", "{7FD3800C-2B89-4ED0-98A0-F5A6DA9B3337}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{1DC7ECC6-B6E1-429B-A40D-18A329BB9882}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DC7ECC6-B6E1-429B-A40D-18A329BB9882}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DC7ECC6-B6E1-429B-A40D-18A329BB9882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FD3800C-2B89-4ED0-98A0-F5A6DA9B3337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FD3800C-2B89-4ED0-98A0-F5A6DA9B3337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FD3800C-2B89-4ED0-98A0-F5A6DA9B3337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FD3800C-2B89-4ED0-98A0-F5A6DA9B3337}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{888DD4E5-1AD8-4CFA-866E-1032B7EF16F8} = {0EDF9399-855C-4A2F-9368-8FF289365E64}
 		{EFBBA7C9-61AF-407E-B1C0-6D605FC8EEBD} = {0EDF9399-855C-4A2F-9368-8FF289365E64}
+		{7FD3800C-2B89-4ED0-98A0-F5A6DA9B3337} = {0EDF9399-855C-4A2F-9368-8FF289365E64}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14B0A3B1-8C81-4EA9-A72A-E607F4D89E41}

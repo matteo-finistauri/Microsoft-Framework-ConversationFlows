@@ -41,7 +41,12 @@ namespace CognitiveServices.LanguageUnderstanding.Conditions
         /// <returns></returns>
         public bool Evaluate(LanguageUnderstandingResult conditionObject)
         {
-            return conditionObject.Parameters[this.EntityName] == this.EntityValue;
+            if (conditionObject.Parameters.ContainsKey(this.EntityName))
+            {
+                return conditionObject.Parameters[this.EntityName] == this.EntityValue;
+            }
+
+            return false;
         }
     }
 }

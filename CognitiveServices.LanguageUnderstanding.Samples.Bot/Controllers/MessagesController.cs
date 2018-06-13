@@ -4,9 +4,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Autofac;
 using CognitiveServices.LanguageUnderstanding.Bot.Dialogs;
 using CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
 
 namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
@@ -14,6 +16,15 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+        private readonly ILifetimeScope scope;
+        private readonly ILuisCommunicationManagerProvider provider;
+
+        public MessagesController(ILuisCommunicationManagerProvider provider)
+        {
+            this.scope = WebApiApplication.FindContainer();
+            this.provider = provider;
+        }
+
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
@@ -22,7 +33,15 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new RootDialog());
+                var builder = new ContainerBuilder();
+                var container = builder.Build();
+                await Conversation.SendAsync(activity, () =>
+                {
+                    using (var scope = DialogModule.BeginLifetimeScope(this.scope, activity))
+                    {
+                        return scope.Resolve<IDialog<object>>();
+                    }
+                });
             }
             else
             {
@@ -55,8 +74,7 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
                     {
                         if (newMember.Id != message.Recipient.Id)
                         {
-                            StateProvider sp = new StateProvider();
-                            var client = sp.Instance;
+                            var client = provider.Instance;
                             client.SetContext("message", message);
                             client.Start();
                         }

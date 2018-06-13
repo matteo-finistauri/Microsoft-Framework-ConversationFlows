@@ -88,10 +88,6 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
             {
                 throw new Exception("No transitions found for " + currentState + " --> " + action);
             }
-            else if (validTransitions.Count() > 1)
-            {
-                throw new Exception("The transition for " + currentState + " --> " + action + " is not unique");
-            }
 
             return validTransitions.First();
         }
@@ -103,7 +99,7 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
         /// <returns></returns>
         public T GetStateById(int value)
         {
-            return this.GetStateById(value, this.InitialState);
+            return this.GetStateById(value, this.InitialState, new List<MachineState<T, U, Y>>());
         }
 
         /// <summary>
@@ -113,19 +109,26 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
         /// <param name="state">The state.</param>
         /// <returns></returns>
         /// <exception cref="Exception">Value not found.</exception>
-        private T GetStateById(int id, MachineState<T, U, Y> state)
+        private T GetStateById(int id, MachineState<T, U, Y> state, List<MachineState<T, U, Y>> alreadyVisitedStates)
         {
             if (state.State.Id == id)
             {
                 return state.State;
             }
+            else
+            {
+                alreadyVisitedStates.Add(state);
+            }
 
             foreach (var link in state.Links)
             {
-                var subNode = GetStateById(id, link.DestinationState);
-                if (subNode != null)
+                if (!alreadyVisitedStates.Contains(link.DestinationState))
                 {
-                    return subNode;
+                    var subNode = GetStateById(id, link.DestinationState, alreadyVisitedStates);
+                    if (subNode != null)
+                    {
+                        return subNode;
+                    }
                 }
             }
 

@@ -20,7 +20,7 @@ namespace CognitiveServices.LanguageUnderstanding
         /// <param name="finalState">if set to <c>true</c> [final state].</param>
         /// <param name="activationCondition">The activation condition.</param>
         public LuisFlowStateTransition(T currentState, T nextState, string intent, bool finalState, IConditionOperator<LanguageUnderstandingResult> activationCondition)
-        : base(currentState, nextState, intent, finalState, (x, y, z) => activationCondition.Evaluate(z))
+        : base(currentState, nextState, intent, finalState, (x, y, z) => activationCondition != null ? activationCondition.Evaluate(z) : true)
         {
         }
     }

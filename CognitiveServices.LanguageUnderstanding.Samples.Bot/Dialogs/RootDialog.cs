@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Dialogs
 {
     [Serializable]
-    public class RootDialog : LuisCommunicationDialog<object, StateProvider>
+    public class RootDialog : LuisCommunicationDialog<object>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RootDialog"/> class.
+        /// </summary>
+        /// <param name="provider"></param>
+        public RootDialog(ILuisCommunicationManagerProvider provider)
+            : base(provider)
+        {
+        }
+
         public override Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);

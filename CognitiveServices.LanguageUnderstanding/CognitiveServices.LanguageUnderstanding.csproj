@@ -56,6 +56,7 @@
     <Compile Include="Conditions\AndConditionOperator.cs" />
     <Compile Include="IBehaviorExecutor.cs" />
     <Compile Include="FlowState.cs" />
+    <Compile Include="ILuisCommunicationManager.cs" />
     <Compile Include="IState.cs" />
     <Compile Include="LuisFlowConfiguration.cs" />
     <Compile Include="Attributes\ProvidesAttribute.cs" />
