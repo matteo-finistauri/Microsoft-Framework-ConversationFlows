@@ -37,8 +37,7 @@
       </condition>
     </luisFlowStateTransition>
 
-    <luisFlowStateTransition currentState="InitialState" nextState="BuildingSomethingElse" intent="Build.Furniture" isFinalState="true">
-    </luisFlowStateTransition>
+    <luisFlowStateTransition currentState="InitialState" nextState="BuildingSomethingElse" intent="Build.Furniture" isFinalState="true" />
 
     <luisFlowStateTransition currentState="BuildingShelf" nextState="TwoMeters" intent="Shelf.Size">
       <condition>

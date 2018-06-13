@@ -1,5 +1,6 @@
 namespace CognitiveServices.LanguageUnderstanding.DB.Migrations
 {
+    using CognitiveServices.LanguageUnderstanding.DB.Seed;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,10 +15,7 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Migrations
 
         protected override void Seed(CognitiveServices.LanguageUnderstanding.DB.ApplicationContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            SeedData.Seed(context);
         }
     }
 }
