@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,12 @@ namespace CognitiveServices.LanguageUnderstanding.DB
 {
     public class LuisFlowState
     {
+        public int ID { get; set; }
+
+        [Required]
         public string StateBehaviorClass { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public bool IsInitialState { get; set; }
@@ -18,13 +23,19 @@ namespace CognitiveServices.LanguageUnderstanding.DB
 
     public class IsEntityEquals
     {
+        public int ID { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Value { get; set; }
     }
 
     public class Condition
     {
+        public int ID { get; set; }
+
         public IsEntityEquals IsEntityEquals { get; set; }
 
         public OrOperator OrOperator { get; set; }
@@ -34,12 +45,17 @@ namespace CognitiveServices.LanguageUnderstanding.DB
 
     public class LuisFlowStateTransition
     {
+        public int ID { get; set; }
+
         public Condition Condition { get; set; }
 
-        public string CurrentState { get; set; }
+        [Required]
+        public LuisFlowState CurrentState { get; set; }
 
-        public string NextState { get; set; }
+        [Required]
+        public LuisFlowState NextState { get; set; }
 
+        [Required]
         public string Intent { get; set; }
 
         public bool IsFinalState { get; set; }
@@ -47,6 +63,8 @@ namespace CognitiveServices.LanguageUnderstanding.DB
 
     public class CombinatorialOperator
     {
+        public int ID { get; set; }
+
         public DbSet<IsEntityEquals> IsEntityEquals { get; set; }
 
         public DbSet<OrOperator> OrOperators { get; set; }
@@ -64,6 +82,11 @@ namespace CognitiveServices.LanguageUnderstanding.DB
 
     public class LuisConfiguration
     {
+        public int ID { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
         public DbSet<LuisFlowState> LuisFlowStates { get; set; }
 
         public DbSet<LuisFlowStateTransition> LuisFlowStateTransitions { get; set; }

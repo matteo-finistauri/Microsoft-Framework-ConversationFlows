@@ -18,7 +18,7 @@ namespace CognitiveServices.LanguageUnderstanding.DB
         /// <value>
         /// The flow states.
         /// </value>
-        public DbSet<FlowState> FlowStates { get; set; }
+        public DbSet<LuisFlowState> FlowStates { get; set; }
 
         /// <summary>
         /// Gets or sets the is entity equals.
@@ -42,7 +42,15 @@ namespace CognitiveServices.LanguageUnderstanding.DB
         /// <value>
         /// The luis flow state transitions.
         /// </value>
-        public DbSet<LuisFlowStateTransition> LuisFlowStateTransitions { get; set; }
+        public DbSet<LuisFlowStateTransition> FlowStateTransitions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the combinatorial operators.
+        /// </summary>
+        /// <value>
+        /// The combinatorial operators.
+        /// </value>
+        public DbSet<CombinatorialOperator> CombinatorialOperators { get; set; }
 
         /// <summary>
         /// Gets or sets the or operators.
@@ -60,6 +68,12 @@ namespace CognitiveServices.LanguageUnderstanding.DB
         /// </value>
         public DbSet<AndOperator> AndOperators { get; set; }
 
+        /// <summary>
+        /// Gets or sets the luis configurations.
+        /// </summary>
+        /// <value>
+        /// The luis configurations.
+        /// </value>
         public DbSet<LuisConfiguration> LuisConfigurations { get; set; }
     }
 }
