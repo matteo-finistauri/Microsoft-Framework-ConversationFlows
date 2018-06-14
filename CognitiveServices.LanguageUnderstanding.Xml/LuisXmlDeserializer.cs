@@ -10,7 +10,7 @@ namespace CognitiveServices.LanguageUnderstanding.Xml
     ///
     /// </summary>
     [Serializable]
-    public static class StatesConverter
+    public static class XmlStatesConverter
     {
         /// <summary>
         /// Converts the specified configuration.

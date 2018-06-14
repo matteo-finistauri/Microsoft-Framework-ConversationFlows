@@ -11,7 +11,7 @@ namespace CognitiveServices.LanguageUnderstanding
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class LuisStateFlowEngine<T>
-        where T : IState
+        where T : class, IState
     {
         #region Fields
 

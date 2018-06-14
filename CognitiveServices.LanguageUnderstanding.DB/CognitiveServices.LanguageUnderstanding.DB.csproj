@@ -47,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LuisDbDeserializer.cs" />
+    <Compile Include="Migrations\201806142134009_Initial.cs" />
+    <Compile Include="Migrations\201806142134009_Initial.Designer.cs">
+      <DependentUpon>201806142134009_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\DBClasses.cs" />
@@ -71,6 +76,11 @@
       <Project>{e439a4aa-cf18-452e-88dc-179609ffb423}</Project>
       <Name>CognitiveServices.LanguageUnderstanding</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806142134009_Initial.resx">
+      <DependentUpon>201806142134009_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

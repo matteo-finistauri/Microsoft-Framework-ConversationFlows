@@ -25,6 +25,14 @@ namespace CognitiveServices.LanguageUnderstanding.Conditions
         }
 
         /// <summary>
+        /// Gets the name of the operator.
+        /// </summary>
+        /// <value>
+        /// The name of the operator.
+        /// </value>
+        protected override string OperatorName => "OR";
+
+        /// <summary>
         /// Evaluates this instance.
         /// </summary>
         /// <param name="conditionObject">The condition object.</param>

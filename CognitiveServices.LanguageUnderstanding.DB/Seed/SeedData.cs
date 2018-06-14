@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,12 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
 
             #region Or operators
 
-            var isTwoOrOperator = new OrOperator();
-            isTwoOrOperator.IsEntityEquals.AddRange(new IsEntityEquals[] { isNumber2, isNumberTwo });
+            var isTwoOrOperator = new OrOperator()
+            {
+                IsEntityEquals = new List<IsEntityEquals>()
+            };
+            isTwoOrOperator.IsEntityEquals.Add(isNumber2);
+            isTwoOrOperator.IsEntityEquals.Add(isNumberTwo);
 
             #endregion Or operators
 
@@ -38,42 +43,48 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
             #region Flow states
 
             List<LuisFlowState> flowStateWithError = new List<LuisFlowState>();
+            List<LuisFlowState> allFlowStates = new List<LuisFlowState>();
 
             var initialFlowState = context.FlowStates.Add(new LuisFlowState()
             {
                 IsInitialState = true,
-                Name = "Initial State",
+                Name = "InitialState",
                 StateBehaviorClass = "CognitiveServices.LanguageUnderstanding.Samples.Bot.ConversationSendBehavior, Bot Application"
             });
             flowStateWithError.Add(initialFlowState);
+            allFlowStates.Add(initialFlowState);
 
             var buildingShelfFlowState = context.FlowStates.Add(new LuisFlowState()
             {
-                Name = "Building Shelf",
+                Name = "BuildingShelf",
                 StateBehaviorClass = "CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application"
             });
             flowStateWithError.Add(buildingShelfFlowState);
+            allFlowStates.Add(buildingShelfFlowState);
 
             var twoMetersFlowState = context.FlowStates.Add(new LuisFlowState()
             {
-                Name = "Two Meters",
+                Name = "TwoMeters",
                 StateBehaviorClass = "CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application"
             });
             flowStateWithError.Add(twoMetersFlowState);
+            allFlowStates.Add(twoMetersFlowState);
 
             var buildingArmchairFlowState = context.FlowStates.Add(new LuisFlowState()
             {
-                Name = "Building Armchair",
+                Name = "BuildingArmchair",
                 StateBehaviorClass = "CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application"
             });
             flowStateWithError.Add(buildingArmchairFlowState);
+            allFlowStates.Add(buildingArmchairFlowState);
 
             var buildingSomethingElseFlowState = context.FlowStates.Add(new LuisFlowState()
             {
-                Name = "Building something else",
+                Name = "BuildingSomethingElse",
                 StateBehaviorClass = "CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application"
             });
             flowStateWithError.Add(buildingSomethingElseFlowState);
+            allFlowStates.Add(buildingSomethingElseFlowState);
 
             var completedFlowState = context.FlowStates.Add(new LuisFlowState()
             {
@@ -81,16 +92,20 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
                 StateBehaviorClass = "CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application"
             });
             flowStateWithError.Add(completedFlowState);
+            allFlowStates.Add(completedFlowState);
 
             var errorHandlingFlowState = context.FlowStates.Add(new LuisFlowState()
             {
-                Name = "Error Handling",
+                Name = "ErrorHandling",
                 StateBehaviorClass = "CognitiveServices.LanguageUnderstanding.Samples.Bot.PostToUserBehavior, Bot Application"
             });
+            allFlowStates.Add(errorHandlingFlowState);
 
             #endregion Flow states
 
             #region Flow state transitions
+
+            List<LuisFlowStateTransition> allTransitions = new List<LuisFlowStateTransition>();
 
             var flowStateTransition1 = context.FlowStateTransitions.Add(new LuisFlowStateTransition()
             {
@@ -99,6 +114,7 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
                 Intent = "Build.Furniture",
                 Condition = isShelfCondition
             });
+            allTransitions.Add(flowStateTransition1);
 
             var flowStateTransition2 = context.FlowStateTransitions.Add(new LuisFlowStateTransition()
             {
@@ -107,6 +123,7 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
                 Intent = "Build.Furniture",
                 Condition = isArmchairCondition
             });
+            allTransitions.Add(flowStateTransition2);
 
             var flowStateTransition3 = context.FlowStateTransitions.Add(new LuisFlowStateTransition()
             {
@@ -114,6 +131,7 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
                 NextState = buildingSomethingElseFlowState,
                 Intent = "Build.Furniture"
             });
+            allTransitions.Add(flowStateTransition3);
 
             var flowStateTransition4 = context.FlowStateTransitions.Add(new LuisFlowStateTransition()
             {
@@ -122,6 +140,7 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
                 Intent = "Shelf.Size",
                 Condition = isTwoCondition
             });
+            allTransitions.Add(flowStateTransition4);
 
             var flowStateTransition5 = context.FlowStateTransitions.Add(new LuisFlowStateTransition()
             {
@@ -129,18 +148,42 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
                 NextState = completedFlowState,
                 Intent = "Acknowledgement"
             });
+            allTransitions.Add(flowStateTransition5);
+
+            var flowStateTransition6 = context.FlowStateTransitions.Add(new LuisFlowStateTransition()
+            {
+                CurrentState = completedFlowState,
+                NextState = buildingShelfFlowState,
+                Intent = "Build.Furniture",
+                Condition = isShelfCondition
+            });
+            allTransitions.Add(flowStateTransition5);
 
             foreach (var state in flowStateWithError)
             {
-                context.FlowStateTransitions.Add(new LuisFlowStateTransition()
+                var transition = context.FlowStateTransitions.Add(new LuisFlowStateTransition()
                 {
                     CurrentState = state,
                     NextState = errorHandlingFlowState,
                     Intent = "None",
                 });
+                allTransitions.Add(transition);
             }
 
             #endregion Flow state transitions
+
+            #region Luis configuration
+
+            var configuration = context.LuisConfigurations.Add(new LuisConfiguration()
+            {
+                Description = "LUIS Configuration",
+                LuisFlowStates = new List<LuisFlowState>(),
+                LuisFlowStateTransitions = new List<LuisFlowStateTransition>()
+            });
+            allFlowStates.ForEach(x => configuration.LuisFlowStates.Add(x));
+            allTransitions.ForEach(x => configuration.LuisFlowStateTransitions.Add(x));
+
+            #endregion Luis configuration
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
     /// <typeparam name="U">The action type.</typeparam>
     /// <typeparam name="Y">The condition parameter type.</typeparam>
     public class FiniteStateMachine<T, U, Y>
-        where T : IState
+        where T : class, IState
     {
         #region Constructors
 
@@ -99,7 +99,13 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
         /// <returns></returns>
         public T GetStateById(int value)
         {
-            return this.GetStateById(value, this.InitialState, new List<MachineState<T, U, Y>>());
+            var result = this.GetStateById(value, this.InitialState, new List<MachineState<T, U, Y>>());
+            if (result == null)
+            {
+                throw new Exception($"State Id {value} not found in the state machine navigation.");
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -111,6 +117,7 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
         /// <exception cref="Exception">Value not found.</exception>
         private T GetStateById(int id, MachineState<T, U, Y> state, List<MachineState<T, U, Y>> alreadyVisitedStates)
         {
+            var currentId = state.State.Id;
             if (state.State.Id == id)
             {
                 return state.State;
@@ -132,7 +139,7 @@ namespace CognitiveServices.LanguageUnderstanding.StateMachine
                 }
             }
 
-            throw new Exception("State Id not found.");
+            return null;
         }
 
         /// <summary>

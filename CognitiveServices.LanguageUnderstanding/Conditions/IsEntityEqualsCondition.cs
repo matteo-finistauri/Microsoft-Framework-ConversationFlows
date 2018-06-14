@@ -43,10 +43,21 @@ namespace CognitiveServices.LanguageUnderstanding.Conditions
         {
             if (conditionObject.Parameters.ContainsKey(this.EntityName))
             {
-                return conditionObject.Parameters[this.EntityName] == this.EntityValue;
+                return conditionObject.Parameters[this.EntityName].Equals(this.EntityValue, StringComparison.OrdinalIgnoreCase);
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return $"{this.EntityName}='{this.EntityValue}'";
         }
     }
 }

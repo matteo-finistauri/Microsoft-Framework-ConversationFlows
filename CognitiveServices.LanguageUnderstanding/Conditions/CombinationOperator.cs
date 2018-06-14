@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Linq;
 
 namespace CognitiveServices.LanguageUnderstanding.Conditions
 {
@@ -39,5 +41,31 @@ namespace CognitiveServices.LanguageUnderstanding.Conditions
         /// <param name="conditionObject">The condition object.</param>
         /// <returns></returns>
         public abstract bool Evaluate(T conditionObject);
+
+        /// <summary>
+        /// Gets the name of the operator.
+        /// </summary>
+        /// <value>
+        /// The name of the operator.
+        /// </value>
+        protected abstract string OperatorName { get; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var op in this.Operators)
+            {
+                sb.Append(op + " " + Operators + " ");
+            }
+
+            sb.Remove(sb.Length - this.OperatorName.Length - 1, this.OperatorName.Length + 1);
+            return "(" + sb.ToString() + ")";
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.ConsoleApp
                 configuration = (LuisConfiguration)serializer.Deserialize(reader);
             }
 
-            var luisConfiguration = StatesConverter.Convert(configuration);
+            var luisConfiguration = XmlStatesConverter.Convert(configuration);
             LuisCommunicationManager client = new LuisCommunicationManager(
                 "a9777fd2-0c56-4a76-b3b4-740b387c05d5", "0c13af8b1228447bb2ce26e7be709940",
                 luisConfiguration, context);

@@ -52,6 +52,12 @@
     <Reference Include="Chronic, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3bd1f1ef638b0d3c, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Chronic.Signed.0.3.2\lib\net40\Chronic.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bot.Builder, Version=3.15.2.2, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Builder.3.15.2.2\lib\net46\Microsoft.Bot.Builder.dll</HintPath>
     </Reference>
@@ -165,6 +171,10 @@
     <ProjectReference Include="..\CognitiveServices.LanguageUnderstanding.Bot\CognitiveServices.LanguageUnderstanding.Bot.csproj">
       <Project>{1dc7ecc6-b6e1-429b-a40d-18a329bb9882}</Project>
       <Name>CognitiveServices.LanguageUnderstanding.Bot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CognitiveServices.LanguageUnderstanding.DB\CognitiveServices.LanguageUnderstanding.DB.csproj">
+      <Project>{86130398-47d9-433d-86f9-3a466365cbc2}</Project>
+      <Name>CognitiveServices.LanguageUnderstanding.DB</Name>
     </ProjectReference>
     <ProjectReference Include="..\CognitiveServices.LanguageUnderstanding.Samples.Shared\CognitiveServices.LanguageUnderstanding.Samples.Shared.csproj">
       <Project>{7fd3800c-2b89-4ed0-98a0-f5a6da9b3337}</Project>

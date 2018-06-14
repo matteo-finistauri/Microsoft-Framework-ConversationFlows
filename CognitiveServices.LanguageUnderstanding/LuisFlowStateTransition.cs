@@ -1,6 +1,7 @@
 ﻿using CognitiveServices.LanguageUnderstanding.Conditions;
 using CognitiveServices.LanguageUnderstanding.StateMachine;
 using System;
+using System.Text;
 
 namespace CognitiveServices.LanguageUnderstanding
 {
@@ -22,6 +23,25 @@ namespace CognitiveServices.LanguageUnderstanding
         public LuisFlowStateTransition(T currentState, T nextState, string intent, bool finalState, IConditionOperator<LanguageUnderstandingResult> activationCondition)
         : base(currentState, nextState, intent, finalState, (x, y, z) => activationCondition != null ? activationCondition.Evaluate(z) : true)
         {
+            this.ActivationCondition = activationCondition;
+        }
+
+        /// <summary>
+        /// The activation condition
+        /// </summary>
+        public IConditionOperator<LanguageUnderstandingResult> ActivationCondition { get; private set; }
+
+        /// <summary>
+        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(CurrentState + " -> " + NextState);
+            sb.Append(" condition=" + this.ActivationCondition);
+            return sb.ToString();
         }
     }
 }
