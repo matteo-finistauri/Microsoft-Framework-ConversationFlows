@@ -93,7 +93,7 @@ namespace CognitiveServices.LanguageUnderstanding.Bot.Dialogs
         /// <param name="value">The value.</param>
         protected void SetContext<Y>(string key, Y value)
         {
-            this.Client.SetContext("context", value);
+            this.Client.SetContext(key, value);
         }
 
         /// <summary>

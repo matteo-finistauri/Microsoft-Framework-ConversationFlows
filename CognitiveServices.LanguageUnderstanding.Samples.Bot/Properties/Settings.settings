@@ -1,6 +1,21 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CognitiveServices.LanguageUnderstanding.Samples.Bot.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LuisAppId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">a9777fd2-0c56-4a76-b3b4-740b387c05d5</Value>
+    </Setting>
+    <Setting Name="LuisAppKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">0c13af8b1228447bb2ce26e7be709940</Value>
+    </Setting>
+    <Setting Name="LoadFromDatabase" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LuisConfigurationId" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="LuisConfigurationXmlFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\matteo.finistauri\source\repos\CognitiveServicesTest\CognitiveServices.LanguageUnderstanding.Samples.Bot\Example.xml</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

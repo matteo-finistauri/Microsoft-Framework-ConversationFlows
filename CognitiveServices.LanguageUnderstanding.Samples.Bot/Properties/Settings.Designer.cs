@@ -22,5 +22,51 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("a9777fd2-0c56-4a76-b3b4-740b387c05d5")]
+        public string LuisAppId {
+            get {
+                return ((string)(this["LuisAppId"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0c13af8b1228447bb2ce26e7be709940")]
+        public string LuisAppKey {
+            get {
+                return ((string)(this["LuisAppKey"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LoadFromDatabase {
+            get {
+                return ((bool)(this["LoadFromDatabase"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int LuisConfigurationId {
+            get {
+                return ((int)(this["LuisConfigurationId"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\matteo.finistauri\\source\\repos\\CognitiveServicesTest\\CognitiveServices.L" +
+            "anguageUnderstanding.Samples.Bot\\Example.xml")]
+        public string LuisConfigurationXmlFile {
+            get {
+                return ((string)(this["LuisConfigurationXmlFile"]));
+            }
+        }
     }
 }

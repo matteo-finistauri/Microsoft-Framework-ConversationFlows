@@ -11,7 +11,6 @@ namespace CognitiveServices
     ///
     /// </summary>
     /// <seealso cref="CognitiveServices.LanguageUnderstanding.IBehaviorExecutor{CognitiveServices.LanguageUnderstanding.FlowState}" />
-    /// <seealso cref="CognitiveServices.LanguageUnderstanding.StateMachine.IStateBehavior{CognitiveServices.LanguageUnderstanding.FlowState}" />
     public class FlowStateBehaviorExecutor : IBehaviorExecutor<FlowState>
     {
         /// <summary>

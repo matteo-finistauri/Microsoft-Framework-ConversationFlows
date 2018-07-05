@@ -16,9 +16,20 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
     [BotAuthentication]
     public class MessagesController : ApiController
     {
+        /// <summary>
+        /// The scope
+        /// </summary>
         private readonly ILifetimeScope scope;
+
+        /// <summary>
+        /// The provider
+        /// </summary>
         private readonly ILuisCommunicationManagerProvider provider;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessagesController"/> class.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
         public MessagesController(ILuisCommunicationManagerProvider provider)
         {
             this.scope = WebApiApplication.FindContainer();
@@ -47,6 +58,7 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
             {
                 HandleSystemMessage(activity);
             }
+
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
@@ -74,7 +86,7 @@ namespace CognitiveServices.LanguageUnderstanding.Samples.Bot.Controllers
                     {
                         if (newMember.Id != message.Recipient.Id)
                         {
-                            var client = provider.Instance;
+                            var client = this.provider.Instance;
                             client.SetContext("message", message);
                             client.Start();
                         }

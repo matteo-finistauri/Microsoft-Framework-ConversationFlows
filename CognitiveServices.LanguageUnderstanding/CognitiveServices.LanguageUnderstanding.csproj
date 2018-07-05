@@ -63,7 +63,7 @@
     <Compile Include="Attributes\RequiresAttribute.cs" />
     <Compile Include="Attributes\StateAttributesHelper.cs" />
     <Compile Include="StateMachine\IStateBehavior.cs" />
-    <Compile Include="LanguageUnderstandingRecognition.cs" />
+    <Compile Include="LanguageUnderstandingResult.cs" />
     <Compile Include="LuisFlowStateTransition.cs" />
     <Compile Include="LuisStateFlowEngine.cs" />
     <Compile Include="LuisCommunicationManager.cs" />

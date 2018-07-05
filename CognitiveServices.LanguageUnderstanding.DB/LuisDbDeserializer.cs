@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CognitiveServices.LanguageUnderstanding.DB
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class LuisDbDeserializer
     {
         /// <summary>
@@ -134,7 +137,6 @@ namespace CognitiveServices.LanguageUnderstanding.DB
                     transitions.Add(transition);
                 }
 
-                var t = transitions.First(x => x.Action == "Build.Furniture").ToString();
                 return transitions;
             }
 

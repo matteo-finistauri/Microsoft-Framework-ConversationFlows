@@ -12,14 +12,14 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
     {
         public static void Seed(ApplicationContext context)
         {
-            #region Is Entity Equals
+            #region Is entity equals operators
 
             var isShelf = context.IsEntityEquals.Add(new IsEntityEquals() { Name = "FurnitureType", Value = "shelf" });
             var isArmchair = context.IsEntityEquals.Add(new IsEntityEquals() { Name = "FurnitureType", Value = "armchair" });
             var isNumberTwo = context.IsEntityEquals.Add(new IsEntityEquals() { Name = "builtin.number", Value = "Two" });
             var isNumber2 = context.IsEntityEquals.Add(new IsEntityEquals() { Name = "builtin.number", Value = "2" });
 
-            #endregion Is Entity Equals
+            #endregion Is entity equals operators
 
             #region Or operators
 
@@ -44,7 +44,6 @@ namespace CognitiveServices.LanguageUnderstanding.DB.Seed
 
             List<LuisFlowState> flowStateWithError = new List<LuisFlowState>();
             List<LuisFlowState> allFlowStates = new List<LuisFlowState>();
-
             var initialFlowState = context.FlowStates.Add(new LuisFlowState()
             {
                 IsInitialState = true,

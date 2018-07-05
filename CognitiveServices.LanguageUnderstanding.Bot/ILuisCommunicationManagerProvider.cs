@@ -12,6 +12,6 @@
         /// <value>
         /// The instance.
         /// </value>
-        LuisCommunicationManager Instance { get; }
+        ILuisCommunicationManager Instance { get; }
     }
 }
